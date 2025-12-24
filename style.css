@@ -1,0 +1,133 @@
+h1{
+  font-family: 'Lucida Sans';
+  font-size: 10vh;
+}
+
+.resaltar {
+  color: yellow;
+  font-weight: bold;
+  text-shadow: 0 0 6px black;
+}
+
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle, #ba2929, #000);
+  color: white;
+  text-align: center;
+}
+
+.pantalla {
+  display: none;
+  padding: 20px;
+}
+
+.pantalla.activa {
+  display: block;
+   padding-top: 80px; /* espacio desde arriba */
+}
+
+button {
+  width: 100%;
+  max-width: 250px;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(45deg, #00ffcc, #0066ff);
+  color: black;
+  /*margin: 80px auto; /* espacio entre el titulo y los botones */
+  cursor: pointer;
+}
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.barra-tiempo {
+  width: 80%;             /* ancho visible completo */
+  height: 30px;           /* más alto para mostrar texto */
+  background: #333;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto;         /* centrado horizontal */
+  border: 3px solid #00ffcc; /* borde estilo arcade */
+  position: relative;
+}
+
+
+#tiempo-barra {
+  height: 100%;
+  width: 100%;
+  background: lime;        /* color inicial */
+  transition: width 0.05s linear; /* suaviza animación */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 25px;
+  color: #000000;            /* color del número */
+  text-shadow: 1px 1px 2px #800202; /* sombra para mejor visibilidad */
+  font-style: italic;
+}
+
+#answers button {
+  background: #222;
+  color: white;
+}
+
+.correct {
+  background: green !important;
+}
+
+.wrong {
+  background: red !important;
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+}
+
+/* Botones de dificultad: horizontalmente separados */
+button.difficulty {
+  width: 200px;      /* ancho fijo menor */
+  margin: 50px 30px;    /* margen izquierdo y derecho */
+  display: inline-block; /* permite que estén uno al lado del otro */
+}
+
+/* Contenedor de respuestas en vertical */
+#answers {
+  display: flex;
+  flex-direction: column;  /* apila los botones */
+  align-items: center;     /* centra horizontalmente */
+  gap: 20px;               /* espacio vertical entre botones */
+  margin-top: 30px;        /* separación desde la pregunta */
+}
+
+/* Estilo de los botones de respuesta */
+#answers button {
+  width: 80%;              /* ancho menor que el contenedor */
+  max-width: 300px;
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: none;
+  background: #222;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse */
+#answers button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #00ffcc, #0066ff);
+  color: black;
+}
