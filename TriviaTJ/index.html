@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trivia Quest</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#00ffcc">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ <!-- MENÚ SELECCION DE DIFICULTAD -->
+<div id="menu" class="pantalla activa">
+  <h1>🎮TRIVIA GAME</h1>
+ <button class="difficulty" onclick="chooseDifficulty('facil')">🟢 Fácil</button>
+<button class="difficulty" onclick="chooseDifficulty('media')">🟡 Medio</button>
+<button class="difficulty" onclick="chooseDifficulty('dificil')">🔴 Difícil</button>
+
+</div>
+
+<!-- JUEGO -->
+<div id="game" class="pantalla">
+  <div class="hud">
+    <div id="vidas">❤️❤️❤️</div>
+    <div class="barra-tiempo">
+      <div id="tiempo-barra"></div>
+    </div>
+    <div>⭐ <span id="score">0</span></div>
+  </div>
+
+  <h2 id="question"></h2>
+  <div id="answers"></div>
+</div>
+
+<!-- FINAL -->
+<div id="end" class="pantalla">
+  <h2 id="endTitle"></h2>
+  <p>Puntaje final: <span id="finalScore"></span></p>
+  <button onclick="location.reload()">Reintentar</button>
+</div>
+
+<p id="finalScore"></p>
+<p id="percentage"></p>
+<div id="stars" style="font-size: 24px;"></div>
+
+
+<script src="question.js"></script>
+<script src="game.js"></script>
+
+</body>
