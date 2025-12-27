@@ -9,17 +9,19 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#00ffcc">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-base.css">
+  <link rel="stylesheet" href="style-effect.css">
+  <link rel="stylesheet" href="style-powers.css">
 </head>
 <body>
 
- <!-- MENÚ SELECCION DE DIFICULTAD -->
+ <!-- MENÚ SELECCIÓN DE DIFICULTAD -->
 <div id="menu" class="pantalla activa">
   <h1>🎮TRIVIA GAME</h1>
- <button class="difficulty" onclick="chooseDifficulty('facil')">🟢 Fácil</button>
-<button class="difficulty" onclick="chooseDifficulty('media')">🟡 Medio</button>
-<button class="difficulty" onclick="chooseDifficulty('dificil')">🔴 Difícil</button>
-
+  <button class="difficulty" onclick="chooseDifficulty('facil')">🟢 Fácil</button>
+  <button class="difficulty" onclick="chooseDifficulty('media')">🟡 Medio</button>
+  <button class="difficulty" onclick="chooseDifficulty('dificil')">🔴 Difícil</button>
+  <button class="difficulty" onclick="chooseDifficulty('prueba')">🧐 Prueba</button>
 </div>
 
 <!-- JUEGO -->
@@ -32,23 +34,38 @@
     <div>⭐ <span id="score">0</span></div>
   </div>
 
+  <div id="floatingMessage"></div>
+
   <h2 id="question"></h2>
   <div id="answers"></div>
+
+  <!-- POWERUPS debajo de las respuestas -->
+  <div id="power-ups" style="display:none; margin-top:10px;">
+    <button onclick="usePowerUp('extraTime')" id="powerExtraTime">⏱️ +5s (2)</button>
+    <button onclick="usePowerUp('removeOption')" id="powerRemove">❌ -1 opción (1)</button>
+  </div>
 </div>
 
 <!-- FINAL -->
 <div id="end" class="pantalla">
   <h2 id="endTitle"></h2>
   <p>Puntaje final: <span id="finalScore"></span></p>
-  <button onclick="location.reload()">Reintentar</button>
+  <p id="percentage"></p>
+  <div id="stars" style="font-size: 24px;"></div>
+  <button id="btn-reintentar" class="difficulty" onclick="retryGame()">Reintentar</button>
 </div>
 
-<p id="finalScore"></p>
-<p id="percentage"></p>
-<div id="stars" style="font-size: 24px;"></div>
+<!-- Preguntas -->
+<script src="questions-facil.js"></script>
+<script src="questions-media.js"></script>
+<script src="questions-dificil.js"></script>
+<script src="prueba.js"></script>
 
-
-<script src="question.js"></script>
-<script src="game.js"></script>
+<!-- Lógica del juego -->
+<script src="game-powers.js"></script>
+<script src="game-timer.js"></script>
+<script src="game-questions.js"></script>
+<script src="game-result.js"></script>
 
 </body>
+</html>
