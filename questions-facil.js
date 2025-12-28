@@ -17,7 +17,7 @@ const questionsFacil = [
  /*15*/ { q: "¿En qué año se adoptó el nombre de Testigos de Jehová?", a: ["1931", "1914", "1824"], c: 0, difficulty: "facil"},
  /*16*/ { q: "¿Quién se disgustó con Jehová por no haber destruido Nínive?", a:["Elías", "Jonás", "Esdras"], c: 1, difficulty: "facil"},
  /*17*/ { q: "¿Quién fue el padre de Juan el Bautista?", a:["Zorobabel", "Zacarías", "Sedequías"], c: 1, difficulty: "facil"},
- /*18*/ { q: "La curiosidad es vicio que debemos evitar, a quien no supo vencerlo el vicio le fue fatal ¿Quién fue?", a:["La esposa de Lot", "Judas", "David"], c: 1, difficulty: "facil"},
+ /*18*/ { q: "La curiosidad es vicio que debemos evitar, a quien no supo vencerlo el vicio le fue fatal ¿Quién fue?", a:["La esposa de Lot", "Judas", "David"], c: 0, difficulty: "facil"},
  /*19*/ { q: "Aunque estas llevan a la muerte, no siempre ocurrió así. Hubo una que dio vida, ¿de quién se habla aquí?", a:["El becerro de oro", "Las estatuas de plata", "La serpiente de cobre"], c: 2, difficulty: "facil"},
  /*20*/ { q: "Sansón fue el más fuerte, el más sabio Salomón, el más valiente fue David, pero, ¿a quién le duró más el corazón?", a:["Jacob", "Matusalén", "Adán"], c: 1, difficulty: "facil"},
  /*21*/ { q: "Mala reputación ella tenía, pero en Jehová confió, por su fe se salvaría al llegar la destrucción, ¿Quién fue?", a:["Rahab", "María", "La hija de Jefté"], c: 0, difficulty: "facil"},
@@ -29,7 +29,7 @@ const questionsFacil = [
  /*27*/ { q: "Un hombre habló y el sol no se ocultó; otro habló y el sol cambió su curso. No fue una orden de guerra ni un mandato público, sino una señal pedida en silencio. ¿Quién fue?", a:["Ezequías", "Josué", "Elías"], c: 0, difficulty: "facil"},
  /*28*/ { q: "¿Cuántos días tardó Jehová en crear todas las cosas? ", a:["7", "5", "6"], c: 2, difficulty: "facil"},
  /*29*/ { q: "¿Cuántos panes y peces usó Jesús para alimentar a las 5000 personas?", a:["2 panes y 5 peces", "5 panes y 2 peces", "5 panes y 5 peces"], c: 1, difficulty: "facil"},
- /*30*/ { q: "¿Qué ciudad es conocida como la ciudad de David?", a:["Belén", "Jerusalen", "Hebrón"], c: 1, difficulty: "facil"},
+ /*30*/ { q: "¿Qué ciudad es conocida como la ciudad de David?", a:["Belén", "Jerusalén", "Hebrón"], c: 1, difficulty: "facil"},
 
 
 ]

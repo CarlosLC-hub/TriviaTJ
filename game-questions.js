@@ -27,7 +27,7 @@ function chooseDifficulty(level){
   switch(level){
     case "facil":
       timePerQuestion = 20;
-      maxQuestions = 20; // mostrar 20 preguntas aleatorias
+      maxQuestions = 15; // mostrar 15 preguntas aleatorias
       allQuestions = questionsFacil;
       break;
     case "media":
