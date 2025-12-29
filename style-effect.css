@@ -166,4 +166,40 @@
   }
 }
 
+/* ==== COMBO INDICADOR ==== */
+#comboIndicator {
+  display: none;
+  position: fixed;
+  top: 10px;       /* desde arriba */
+  right: 10px;     /* desde la derecha */
+  font-size: 28px;
+  font-weight: bold;
+  color: orange;
+  text-shadow: 0 0 8px #ffcc33;
+  z-index: 9999;
+  transform: none; /* eliminar centrado horizontal */
+}
+
+
+/* Brillo intermitente para racha */
+#comboIndicator.glow {
+  animation: comboGlow 1s infinite alternate;
+}
+
+@keyframes comboGlow {
+  0% { text-shadow: 0 0 6px #ffcc33, 0 0 12px orange; }
+  50% { text-shadow: 0 0 12px #ffff33, 0 0 20px orange; }
+  100% { text-shadow: 0 0 6px #ffcc33, 0 0 12px orange; }
+}
+
+/* Animación de ruptura */
+@keyframes comboBreak {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; text-shadow: 0 0 12px #ffcc33; }
+  50% { transform: scale(1.5) rotate(15deg); opacity: 0.8; text-shadow: 0 0 20px #ff6600; }
+  100% { transform: scale(0) rotate(-30deg); opacity: 0; text-shadow: none; }
+}
+
+#comboIndicator.break {
+  animation: comboBreak 0.8s ease forwards;
+}
 

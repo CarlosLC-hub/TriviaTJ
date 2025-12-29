@@ -21,13 +21,20 @@ soundVictory.volume = 0.7;
 soundGameOver.volume = 0.7;
 soundContinue.volume = 0.7;
 
+// ==== COMBO ====  
+let comboCount = 0;
+let comboActive = false;
+let comboAwarded = false;
+let comboIndicator;
+let powerUpMessage;
+
 // ==== SELECCIONAR DIFICULTAD ====  
 function chooseDifficulty(level){
   let allQuestions = [];
   switch(level){
     case "facil":
       timePerQuestion = 20;
-      maxQuestions = 15; // mostrar 15 preguntas aleatorias
+      maxQuestions = 15; 
       allQuestions = questionsFacil;
       break;
     case "media":
@@ -47,14 +54,13 @@ function chooseDifficulty(level){
       break;
   }
 
-  // Mezclar y seleccionar al azar maxQuestions preguntas
   selectedQuestions = shuffleArray([...allQuestions]).slice(0, maxQuestions);
 
   document.getElementById("menu").classList.remove("activa");
   startGame();
 }
 
-// Función de utilidad para mezclar arrays
+// ==== UTILIDADES ====  
 function shuffleArray(array){
   for(let i = array.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i + 1));
@@ -70,12 +76,49 @@ function startGame() {
   lives = 3;
   correctAnswers = 0;
   maxScore = selectedQuestions.length * pointsPerQuestion;
+  comboCount = 0;
+  comboActive = false;
+  comboAwarded = false;
 
   document.getElementById("game").classList.add("activa");
   updateLives();
   document.getElementById("score").innerText = score;
 
-  showPowerUps(); // Mostrar power-ups al iniciar
+  showPowerUps(); 
+
+  // Indicador de combo superior derecho
+comboIndicator = document.getElementById("comboIndicator");
+if(!comboIndicator){
+  comboIndicator = document.createElement("div");
+  comboIndicator.id = "comboIndicator";
+  comboIndicator.style.position = "fixed";
+  comboIndicator.style.top = "10px";       // desde arriba
+  comboIndicator.style.right = "10px";     // desde la derecha
+  comboIndicator.style.fontSize = "28px";
+  comboIndicator.style.fontWeight = "bold";
+  comboIndicator.style.color = "orange";
+  comboIndicator.style.textShadow = "0 0 8px #ffcc33";
+  comboIndicator.style.transform = "";     // eliminar centrado
+  document.body.appendChild(comboIndicator);
+}
+comboIndicator.style.display = "none";
+comboIndicator.className = "";
+
+
+  // Mensaje de power-up ganado debajo de las opciones
+  powerUpMessage = document.getElementById("powerUpMessage");
+  if(!powerUpMessage){
+    powerUpMessage = document.createElement("div");
+    powerUpMessage.id = "powerUpMessage";
+    powerUpMessage.style.fontSize = "24px";
+    powerUpMessage.style.fontWeight = "bold";
+    powerUpMessage.style.color = "yellow";
+    powerUpMessage.style.textAlign = "center";
+    powerUpMessage.style.marginTop = "10px";
+    document.getElementById("answers").after(powerUpMessage);
+  }
+  powerUpMessage.style.display = "none";
+
   loadQuestion();
 }
 
@@ -102,10 +145,7 @@ function loadQuestion() {
   options.forEach((o, i) => {
     const btn = document.createElement("button");
     btn.innerText = o.text;
-
-    // Marcar opción correcta para power-ups
     btn.dataset.correct = (i === correctIndex);
-
     btn.onclick = () => checkAnswer(i, btn, correctIndex);
     answers.appendChild(btn);
   });
@@ -115,6 +155,7 @@ function loadQuestion() {
     updateLives();
     soundWrong.currentTime = 0;
     soundWrong.play();
+    resetCombo();
     index++;
     loadQuestion();
   });
@@ -131,12 +172,14 @@ function checkAnswer(i, btn, correctIndex){
     soundCorrect.currentTime = 0;
     soundCorrect.play();
     showFloatingMessage("¡Correcto! 🎉", "correct");
+    updateCombo();
   } else {
     lives--;
     btn.classList.add("wrong");
     soundWrong.currentTime = 0;
     soundWrong.play();
     showFloatingMessage("Incorrecto 😬", "wrong");
+    resetCombo();
   }
 
   score = Math.max(0, score);
@@ -180,10 +223,63 @@ function removeRandomWrongOption() {
   toRemove.disabled = true;
   toRemove.style.opacity = "0.3";
 
-  // Animación flotante
   const msg = document.createElement("div");
   msg.className = "floating-message power-up";
   msg.innerText = "Opción eliminada ❌";
   document.body.appendChild(msg);
   setTimeout(() => msg.remove(), 1200);
+}
+
+// ==== COMBO ====  
+function updateCombo(){
+  if(comboAwarded) return;
+
+  // Inicia combo después de la segunda pregunta correcta
+  if(correctAnswers <= 1) return;
+
+  comboCount++;
+  comboActive = true;
+  comboIndicator.style.display = "block";
+  comboIndicator.className = "glow"; // efecto de brillo mientras está activo
+
+  if(comboCount < 5){
+    comboIndicator.innerText = `x${comboCount}🔥`;
+  } else if(comboCount >= 5){
+    comboAwarded = true;
+    comboIndicator.innerText = "";
+
+    // Otorgar power-up de eliminar opción
+    powerUps.removeOption++;
+    updatePowerUpsDisplay();
+
+    // Mostrar mensaje debajo de opciones
+    powerUpMessage.innerText = "¡Has ganado un power-up de eliminar opción!";
+    powerUpMessage.style.display = "block";
+
+    setTimeout(()=> {
+      comboIndicator.style.display = "none";
+      powerUpMessage.style.display = "none";
+      comboActive = false;
+      comboCount = 0;
+    }, 2500);
+  }
+}
+
+function resetCombo(){
+  if(comboActive){
+    // Aplicar animación de ruptura
+    comboIndicator.classList.add("break");
+
+    setTimeout(() => {
+      comboIndicator.classList.remove("break");
+      comboIndicator.style.display = "none";
+      comboActive = false;
+      comboCount = 0;
+    }, 800); // coincide con duración de comboBreak
+  } else {
+    comboCount = 0;
+    comboActive = false;
+    comboIndicator.style.display = "none";
+    comboIndicator.className = "";
+  }
 }
