@@ -27,12 +27,10 @@
 <div id="modeMenu" class="pantalla">
   <div class="pantalla-contenido">
     <h1>Selecciona modo de juego</h1>
-
     <div class="difficulty-container">
       <button class="difficulty" onclick="selectMode('classic')">📚 Modo Clásico</button>
       <button class="difficulty" onclick="selectMode('timed')">⏱️ Contrarreloj</button>
     </div>
-
     <button class="difficulty" onclick="backToMain()">⬅️ Volver</button>
   </div>
 </div>
@@ -41,14 +39,12 @@
 <div id="menu" class="pantalla">
   <div class="pantalla-contenido">
     <h1>Selecciona dificultad</h1>
-
     <div class="difficulty-container">
       <button class="difficulty" onclick="chooseDifficulty('facil')">🟢 Fácil</button>
       <button class="difficulty" onclick="chooseDifficulty('media')">🟡 Medio</button>
       <button class="difficulty" onclick="chooseDifficulty('dificil')">🔴 Difícil</button>
       <button class="difficulty" onclick="chooseDifficulty('prueba')">🧐 Prueba</button>
     </div>
-
     <button class="difficulty" onclick="backToModes()">⬅️ Volver</button>
   </div>
 </div>
@@ -56,14 +52,11 @@
 <!-- ===== JUEGO ===== -->
 <div id="game" class="pantalla">
   <div class="pantalla-contenido">
-
     <div class="hud">
       <div id="vidas">❤️❤️❤️</div>
-
       <div class="barra-tiempo">
         <div id="tiempo-barra"></div>
       </div>
-
       <div>⭐ <span id="score">0</span></div>
     </div>
 
@@ -86,7 +79,6 @@
     <p>Puntaje final: <span id="finalScore"></span></p>
     <p id="percentage"></p>
     <div id="stars"></div>
-
     <div class="difficulty-container">
       <button class="difficulty" onclick="retryGame()">🔁 Reintentar</button>
       <button class="difficulty" onclick="backToMain()">🏠 Menú principal</button>
@@ -96,12 +88,10 @@
 
 <!-- ===== SCRIPTS ===== -->
 <script src="game-modes.js"></script>
-
 <script src="questions-facil.js"></script>
 <script src="questions-media.js"></script>
 <script src="questions-dificil.js"></script>
 <script src="prueba.js"></script>
-
 <script src="game-powers.js"></script>
 <script src="game-timer.js"></script>
 <script src="game-questions.js"></script>

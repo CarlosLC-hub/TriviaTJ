@@ -6,7 +6,6 @@ body {
 }
 
 /* ================= PANTALLAS ================= */
-
 .pantalla {
   display: none;
   position: fixed;
@@ -22,13 +21,12 @@ body {
 }
 
 .pantalla-contenido {
-  width: 100%;
+  width: 90%;
   max-width: 700px;
   padding: 20px;
 }
 
 /* ================= TITULOS ================= */
-
 h1 {
   font-family: 'Lucida Sans';
   font-size: clamp(2.5rem, 6vw, 4rem);
@@ -41,7 +39,6 @@ h1 {
 }
 
 /* ================= BOTONES ================= */
-
 button {
   width: 100%;
   max-width: 250px;
@@ -73,7 +70,6 @@ button.difficulty {
 }
 
 /* ================= HUD ================= */
-
 .hud {
   width: 100%;
   max-width: 800px;
@@ -84,7 +80,6 @@ button.difficulty {
 }
 
 /* ================= BARRA TIEMPO ================= */
-
 .barra-tiempo {
   width: 100%;
   max-width: 500px;
@@ -108,7 +103,6 @@ button.difficulty {
 }
 
 /* ================= RESPUESTAS ================= */
-
 #answers {
   display: flex;
   flex-direction: column;
@@ -130,7 +124,6 @@ button.difficulty {
 }
 
 /* ================= ESTADOS ================= */
-
 .correct {
   background: green !important;
 }
@@ -144,4 +137,6 @@ button.difficulty {
   0% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
   50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
 }
