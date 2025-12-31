@@ -15,6 +15,7 @@ function showModeMenu(){
 
 function backToMain(){
   hideAllScreens();
+  resetCombo();
   document.getElementById("mainMenu").classList.add("activa");
 }
 

@@ -156,5 +156,6 @@ function retryGame() {
   document.getElementById("percentage").innerText = "";
 
   initPowerUps();
+  resetCombo();
   clearInterval(timer);
 }
