@@ -80,11 +80,12 @@ function startGame() {
   comboActive = false;
   comboAwarded = false;
 
+  initPowerUps();
+
   document.getElementById("game").classList.add("activa");
   updateLives();
   document.getElementById("score").innerText = score;
 
-  showPowerUps(); 
 
   // Indicador de combo superior derecho
 comboIndicator = document.getElementById("comboIndicator");
@@ -248,12 +249,12 @@ function updateCombo(){
     comboAwarded = true;
     comboIndicator.innerText = "";
 
-    // Otorgar power-up de eliminar opción
+    // Otorgar power-up de reducir opciones
     powerUps.removeOption++;
     updatePowerUpsDisplay();
 
     // Mostrar mensaje debajo de opciones
-    powerUpMessage.innerText = "¡Has ganado un power-up de eliminar opción!";
+    powerUpMessage.innerText = "¡Has ganado un power-up de reducir opciones!";
     powerUpMessage.style.display = "block";
 
     setTimeout(()=> {

@@ -1,3 +1,4 @@
+/* ==== CONTENEDOR DE POWER-UPS ==== */
 #power-ups {
   display: none;
   justify-content: center;
@@ -5,27 +6,47 @@
   margin-top: 15px;
 }
 
-#power-ups button {
+/* ==== BOTONES DE POWER-UP ==== */
+.power-btn {
   padding: 8px 14px;
   font-size: 14px;
   border-radius: 6px;
-  border: none;
+  border: 2px solid #00ffcc;
+  font-weight: 400;
   cursor: pointer;
-  transition: transform 0.2s, opacity 0.2s;
+  background: linear-gradient(45deg, #00ffcc, #0066ff);
+  color: black;
+  text-shadow: 1px 1px 2px #000;
+  transition: transform 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s, opacity 0.2s;
+
+  width: 400px;      /* ancho fijo menor */
+  margin: 30px 30px;    /* margen izquierdo y derecho */
+  display: inline-block; /* permite que estén uno al lado del otro */
+
+
 }
 
-#power-ups button:hover:not(:disabled) {
+.power-btn:hover:not(:disabled) {
   transform: scale(1.1);
+  background: linear-gradient(45deg, #ffcc00bd, #ff9900bd);
+  box-shadow: 0 0 15px #ffcc00, 0 0 25px #ff9900;
+  font-weight: 500;
+  color: black;
 }
 
-/* Mensaje flotante de power-ups */
-.floating-message.power-up {
+.power-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+  box-shadow: none;
+}
+
+
+/* ==== MENSAJES FLOTANTES DE POWER-UPS ==== */
+.floating-message.power-up,
+.floating-message.swap {
   position: fixed;
-  top: 30%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: transparent;
-  color: yellow;
   font-weight: bold;
   font-size: 20px;
   pointer-events: none;
@@ -33,20 +54,11 @@
   animation: floatUp 1.2s ease forwards;
 }
 
+.floating-message.power-up { top: 30%; color: yellow; }
+.floating-message.swap { top: 35%; color: #00ccff; }
+
+/* ==== ANIMACIÓN FLOTANTE ==== */
 @keyframes floatUp {
   0% { opacity: 1; transform: translate(-50%, 0); }
   100% { opacity: 0; transform: translate(-50%, -80px); }
-}
-
-/* Animación de caída confeti */
-@keyframes fall {
-  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(500px) rotate(360deg); opacity: 0; }
-}
-
-.confetti-piece {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  z-index: 9999;
 }
