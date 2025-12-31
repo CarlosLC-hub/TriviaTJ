@@ -17,81 +17,59 @@
 
 <!-- ===== MENÚ PRINCIPAL ===== -->
 <div id="mainMenu" class="pantalla activa">
-  <div class="pantalla-contenido">
-    <h1>🎮 TRIVIA GAME 🎮</h1>
-    <button class="difficulty" onclick="showModeMenu()">▶️ Jugar</button>
-  </div>
+  <h1>🎮 TRIVIA GAME 🎮</h1>
+  <button class="difficulty" onclick="showModeMenu()">▶️ Jugar</button>
 </div>
 
 <!-- ===== MENÚ SELECCIÓN DE MODO ===== -->
 <div id="modeMenu" class="pantalla">
-  <div class="pantalla-contenido">
-    <h1>Selecciona modo de juego</h1>
-
-    <div class="difficulty-container">
-      <button class="difficulty" onclick="selectMode('classic')">📚 Modo Clásico</button>
-      <button class="difficulty" onclick="selectMode('timed')">⏱️ Contrarreloj</button>
-    </div>
-
-    <button class="difficulty" onclick="backToMain()">⬅️ Volver</button>
-  </div>
+  <h1>Selecciona modo de juego</h1>
+  <button class="difficulty" onclick="selectMode('classic')">📚 Modo Clásico</button>
+  <button class="difficulty" onclick="selectMode('timed')">⏱️ Contrarreloj</button>
+  <button class="difficulty" onclick="backToMain()">⬅️ Volver</button>
 </div>
 
 <!-- ===== MENÚ SELECCIÓN DE DIFICULTAD ===== -->
 <div id="menu" class="pantalla">
-  <div class="pantalla-contenido">
-    <h1>Selecciona dificultad</h1>
-
-    <div class="difficulty-container">
-      <button class="difficulty" onclick="chooseDifficulty('facil')">🟢 Fácil</button>
-      <button class="difficulty" onclick="chooseDifficulty('media')">🟡 Medio</button>
-      <button class="difficulty" onclick="chooseDifficulty('dificil')">🔴 Difícil</button>
-      <button class="difficulty" onclick="chooseDifficulty('prueba')">🧐 Prueba</button>
-    </div>
-
-    <button class="difficulty" onclick="backToModes()">⬅️ Volver</button>
-  </div>
+  <h1>Selecciona dificultad</h1>
+  <button class="difficulty" onclick="chooseDifficulty('facil')">🟢 Fácil</button>
+  <button class="difficulty" onclick="chooseDifficulty('media')">🟡 Medio</button>
+  <button class="difficulty" onclick="chooseDifficulty('dificil')">🔴 Difícil</button>
+  <button class="difficulty" onclick="chooseDifficulty('prueba')">🧐 Prueba</button>
+  <button class="difficulty" onclick="backToModes()">⬅️ Volver</button>
 </div>
 
 <!-- ===== JUEGO ===== -->
 <div id="game" class="pantalla">
-  <div class="pantalla-contenido">
+  <div class="hud">
+    <div id="vidas">❤️❤️❤️</div>
 
-    <div class="hud">
-      <div id="vidas">❤️❤️❤️</div>
-
-      <div class="barra-tiempo">
-        <div id="tiempo-barra"></div>
-      </div>
-
-      <div>⭐ <span id="score">0</span></div>
+    <div class="barra-tiempo">
+      <div id="tiempo-barra"></div>
     </div>
 
-    <h2 id="question"></h2>
-    <div id="answers"></div>
+    <div>⭐ <span id="score">0</span></div>
+  </div>
 
-    <div id="power-ups">
-      <button class="power-btn" onclick="usePowerUp('extraTime')" id="powerExtraTime">⏱️ +5s (2)</button>
-      <button class="power-btn" onclick="useSwapQuestionPowerUp()" id="powerSwap">🔄 Cambiar pregunta (1)</button>
-      <button class="power-btn" onclick="usePowerUp('removeOption')" id="powerRemove">❌ 50/50 (1)</button>
-    </div>
+  <h2 id="question"></h2>
+  <div id="answers"></div>
 
+  <!-- POWER UPS -->
+  <div id="power-ups">
+    <button class="power-btn" onclick="usePowerUp('extraTime')" id="powerExtraTime">⏱️ +5s (2)</button>
+    <button class="power-btn" onclick="useSwapQuestionPowerUp()" id="powerSwap">🔄 Cambiar pregunta (1)</button>
+    <button class="power-btn" onclick="usePowerUp('removeOption')" id="powerRemove">❌ 50/50 (1)</button>
   </div>
 </div>
 
 <!-- ===== FINAL ===== -->
 <div id="end" class="pantalla">
-  <div class="pantalla-contenido">
-    <h2 id="endTitle"></h2>
-    <p>Puntaje final: <span id="finalScore"></span></p>
-    <p id="percentage"></p>
-    <div id="stars"></div>
-
-    <div class="difficulty-container">
-      <button class="difficulty" onclick="retryGame()">🔁 Reintentar</button>
-      <button class="difficulty" onclick="backToMain()">🏠 Menú principal</button>
-    </div>
-  </div>
+  <h2 id="endTitle"></h2>
+  <p>Puntaje final: <span id="finalScore"></span></p>
+  <p id="percentage"></p>
+  <div id="stars"></div>
+  <button class="difficulty" onclick="retryGame()">🔁 Reintentar</button>
+  <button class="difficulty" onclick="backToMain()">🏠 Menú principal</button>
 </div>
 
 <!-- ===== SCRIPTS ===== -->
