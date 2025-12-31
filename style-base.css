@@ -1,35 +1,6 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: #ffffff;
-  text-align: center;
-}
-
-/* ================= PANTALLAS ================= */
-.pantalla {
-  display: none;
-  position: fixed;
-  inset: 0;
-  min-height: 100vh;
-  background: radial-gradient(circle, #ba2929, #000);
-}
-
-.pantalla.activa {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pantalla-contenido {
-  width: 90%;
-  max-width: 700px;
-  padding: 20px;
-}
-
-/* ================= TITULOS ================= */
-h1 {
+h1{
   font-family: 'Lucida Sans';
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: 10vh;
 }
 
 .resaltar {
@@ -38,92 +9,64 @@ h1 {
   text-shadow: 0 0 6px black;
 }
 
-/* ================= BOTONES ================= */
-button {
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.pantalla {
+  display: none;
+  position: absolute;
+  top: 0; left: 0;
   width: 100%;
-  max-width: 250px;
-  padding: 15px;
-  font-size: 20px;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(45deg, #00ffcc, #0066ff);
-  color: black;
-  cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
+  height: 100%;
+  background: radial-gradient(circle, #ba2929, #000);
+  z-index: 1000;          /* alto para que esté sobre la interfaz de juego */
 }
 
-button:hover {
-  transform: scale(1.05);
+.pantalla.activa {
+  display: block;
+   padding-top: 80px; /* espacio desde arriba */
 }
 
-/* Botones dificultad agrupados */
-.difficulty-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin: 40px 0;
-}
 
-button.difficulty {
-  width: 200px;
-}
-
-/* ================= HUD ================= */
 .hud {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
-/* ================= BARRA TIEMPO ================= */
 .barra-tiempo {
-  width: 100%;
-  max-width: 500px;
-  height: 30px;
+  width: 80%;             /* ancho visible completo */
+  height: 30px;           /* más alto para mostrar texto */
   background: #333;
   border-radius: 8px;
   overflow: hidden;
-  border: 3px solid #00ffcc;
+  margin: 0 auto;         /* centrado horizontal */
+  border: 3px solid #00ffcc; /* borde estilo arcade */
+  position: relative;
 }
+
 
 #tiempo-barra {
   height: 100%;
   width: 100%;
-  background: lime;
+  background: lime;        /* color inicial */
+  transition: width 0.05s linear; /* suaviza animación */
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-weight: bold;
-  font-size: 22px;
-  color: black;
-}
-
-/* ================= RESPUESTAS ================= */
-#answers {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 15px;
-  margin-top: 30px;
+  font-weight: bold;
+  font-size: 25px;
+  color: #000000;            /* color del número */
+  text-shadow: 1px 1px 2px #800202; /* sombra para mejor visibilidad */
+  font-style: italic;
 }
 
-#answers button {
-  width: 90%;
-  max-width: 400px;
-  background: #222;
-  color: white;
-}
-
-#answers button:hover {
-  background: linear-gradient(45deg, #00ffcc, #0066ff);
-  color: black;
-}
-
-/* ================= ESTADOS ================= */
 .correct {
   background: green !important;
 }
@@ -137,6 +80,70 @@ button.difficulty {
   0% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
   50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
 }
+
+/*Botones*/
+
+button {
+  width: 100%;
+  max-width: 250px;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(45deg, #00ffcc, #0066ff);
+  color: black;
+  /*margin: 80px auto; /* espacio entre el titulo y los botones */
+  cursor: pointer;
+}
+
+/* Botones de dificultad: horizontalmente separados */
+button.difficulty {
+  width: 200px;      /* ancho fijo menor */
+  margin: 50px 30px;    /* margen izquierdo y derecho */
+  display: inline-block; /* permite que estén uno al lado del otro */
+}
+
+button.difficulty:hover {
+  transform: scale(1.2);
+  background: #330785b7;
+  color: black;
+}
+
+/* Contenedor de respuestas en vertical */
+#answers {
+  display: flex;
+  flex-direction: column;  /* apila los botones */
+  align-items: center;     /* centra horizontalmente */
+  gap: 20px;               /* espacio vertical entre botones */
+  margin-top: 30px;        /* separación desde la pregunta */
+}
+
+/* Estilo de los botones de respuesta */
+#answers button {
+  width: 80%;              /* ancho menor que el contenedor */
+  max-width: 300px;
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: none;
+  background: #222;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse */
+#answers button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #00ffcc, #0066ff);
+  color: black;
+}
+
+/*Boton de reintentar*/
+#btn-reintentar.difficulty:hover {
+   transform: scale(1.05);
+   background: linear-gradient(45deg, #047221, #57c706);
+   color: black;  
+}
+
