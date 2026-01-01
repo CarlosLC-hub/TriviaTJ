@@ -5,10 +5,6 @@
   <title>Trivia Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- PWA -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#00ffcc">
-
   <link rel="stylesheet" href="style-base.css">
   <link rel="stylesheet" href="style-effect.css">
   <link rel="stylesheet" href="style-powers.css">
@@ -18,20 +14,9 @@
 <!-- ===== MENÚ PRINCIPAL ===== -->
 <div id="mainMenu" class="pantalla activa">
   <div class="pantalla-contenido">
-   <h1><span class="emoji">🎮</span> TRIVIA GAME <span class="emoji">🎮</span></h1>
-    <button class="difficulty" onclick="showModeMenu()">▶️ Jugar</button>
-  </div>
-</div>
-
-<!-- ===== MENÚ SELECCIÓN DE MODO ===== -->
-<div id="modeMenu" class="pantalla">
-  <div class="pantalla-contenido">
-    <h1>Selecciona modo de juego</h1>
-    <div class="difficulty-container">
-      <button class="difficulty" onclick="selectMode('classic')">📚 Modo Clásico</button>
-      <button class="difficulty" onclick="selectMode('timed')">⏱️ Contrarreloj</button>
-    </div>
-    <button class="difficulty" onclick="backToMain()">⬅️ Volver</button>
+    <div class="emojis">🎮🎮🎮</div>
+    <h1>TRIVIA GAME</h1>
+    <button class="difficulty" onclick="showDifficultyMenu()">▶️ Jugar</button>
   </div>
 </div>
 
@@ -45,7 +30,7 @@
       <button class="difficulty" onclick="chooseDifficulty('dificil')">🔴 Difícil</button>
       <button class="difficulty" onclick="chooseDifficulty('prueba')">🧐 Prueba</button>
     </div>
-    <button class="difficulty" onclick="backToModes()">⬅️ Volver</button>
+    <button class="difficulty" onclick="backToMain()">⬅️ Volver</button>
   </div>
 </div>
 
@@ -68,7 +53,6 @@
       <button class="power-btn" onclick="useSwapQuestionPowerUp()" id="powerSwap">🔄 Cambiar pregunta (1)</button>
       <button class="power-btn" onclick="usePowerUp('removeOption')" id="powerRemove">❌ 50/50 (1)</button>
     </div>
-
   </div>
 </div>
 
@@ -81,13 +65,27 @@
     <div id="stars"></div>
     <div class="difficulty-container">
       <button class="difficulty" onclick="retryGame()">🔁 Reintentar</button>
-      <button class="difficulty" onclick="backToMain()">🏠 Menú principal</button>
     </div>
   </div>
 </div>
 
 <!-- ===== SCRIPTS ===== -->
-<script src="game-modes.js"></script>
+<script>
+function hideAllScreens() {
+  document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("activa"));
+}
+
+function showDifficultyMenu() {
+  hideAllScreens();
+  document.getElementById("menu").classList.add("activa");
+}
+
+function backToMain() {
+  hideAllScreens();
+  document.getElementById("mainMenu").classList.add("activa");
+}
+</script>
+
 <script src="questions-facil.js"></script>
 <script src="questions-media.js"></script>
 <script src="questions-dificil.js"></script>

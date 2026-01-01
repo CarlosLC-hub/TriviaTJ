@@ -27,31 +27,28 @@ body {
 }
 
 /* ================= TITULOS ================= */
-/* Título principal con emojis */
+/* Contenedor de emojis */
+.emojis {
+    font-size: 3rem;         /* tamaño grande, pero menor que el título */
+    text-align: center;
+    margin-bottom: 10px;     /* espacio entre emojis y título */
+}
+
+/* Título principal */
 h1 {
     font-family: 'Lucida Sans', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;   /* evita que los emojis salten de línea */
-    gap: 10px;           /* espacio entre emojis y texto */
+    font-size: clamp(3rem, 6vw, 5rem);  /* grande y adaptable a pantalla */
+    margin: 0 0 20px 0;       /* separa del botón */
+    text-align: center;
 }
 
-/* Ajuste de tamaño para los emojis */
-h1 .emoji {
-    font-size: 1.2em;    /* ligeramente más grande que el texto */
-}
-
-/* Ajuste para pantallas muy pequeñas */
+/* Ajustes para pantallas muy pequeñas */
 @media (max-width: 400px) {
-    h1 {
-        font-size: 5vw;   /* título más pequeño */
-        gap: 5px;         /* menos espacio entre emojis y texto */
+    .emojis {
+        font-size: 2.5rem;   /* reduce ligeramente los emojis */
     }
-    h1 .emoji {
-        font-size: 1.1em;
+    h1 {
+        font-size: 6vw;      /* mantiene título visible pero adaptable */
     }
 }
 
