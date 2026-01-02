@@ -8,7 +8,7 @@ let powerUps = {
 // Mostrar power-ups solo en la pantalla de juego
 function showPowerUps() {
   const container = document.getElementById("power-ups");
-  container.style.display = "flex"; 
+  container.style.display = "flex";
   updatePowerUpsDisplay();
 }
 
@@ -40,14 +40,20 @@ function usePowerUp(type) {
 
   switch(type) {
     case "extraTime":
+      playPowerSound("time");
       time = Math.min(time + 5, timePerQuestion);
       animateExtraTime();
       updateTimeBar();
       break;
+
     case "removeOption":
+      playPowerSound("remove");
       removeToTwoOptionsWithAnimation();
       break;
   }
+
+  // 🔥 Quitar foco para evitar brillo pegado
+  document.activeElement.blur();
 }
 
 // Animación visual de +5 segundos
@@ -59,18 +65,17 @@ function animateExtraTime() {
   setTimeout(() => msg.remove(), 1200);
 }
 
-// Función para eliminar opciones dejando solo 2: la correcta y una incorrecta al azar
+// Función para eliminar opciones dejando solo 2
 function removeToTwoOptionsWithAnimation() {
   const answers = Array.from(document.getElementById("answers").children);
-  const correctBtn = answers.find(btn => btn.dataset.correct === "true");
-  const wrongBtns = answers.filter(btn => btn.dataset.correct !== "true" && !btn.disabled);
+  const wrongBtns = answers.filter(
+    btn => btn.dataset.correct !== "true" && !btn.disabled
+  );
 
   if (wrongBtns.length === 0) return;
 
-  // Elegir solo un botón incorrecto al azar para dejarlo
   const keepBtn = wrongBtns[Math.floor(Math.random() * wrongBtns.length)];
 
-  // Deshabilitar los demás botones incorrectos
   wrongBtns.forEach(btn => {
     if (btn !== keepBtn) {
       btn.disabled = true;
@@ -78,7 +83,6 @@ function removeToTwoOptionsWithAnimation() {
     }
   });
 
-  // Animación flotante
   const msg = document.createElement("div");
   msg.className = "floating-message power-up";
   msg.innerText = "Opciones reducidas ❌";
@@ -88,8 +92,7 @@ function removeToTwoOptionsWithAnimation() {
 
 // Ocultar power-ups al finalizar el juego
 function hidePowerUps() {
-  const container = document.getElementById("power-ups");
-  container.style.display = "none";
+  document.getElementById("power-ups").style.display = "none";
 }
 
 // Inicializar contadores
@@ -105,7 +108,109 @@ function useSwapQuestionPowerUp() {
   if (powerUps.swapQuestion <= 0) return;
 
   powerUps.swapQuestion--;
-  updatePowerUpsDisplay(); 
+  updatePowerUpsDisplay();
+  playPowerSound("swap");
+
+  const msg = document.createElement("div");
+  msg.className = "floating-message power-up swap";
+  msg.innerText = "¡Pregunta cambiada! 🔄";
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 1200);
+
+  if (index < selectedQuestions.length - 1) {
+    const currentQuestion = selectedQuestions[index];
+    const category = getQuestionCategory(currentQuestion);
+
+    selectedQuestions.splice(index, 1);
+
+    const availableQuestions = category.filter(
+      q => !selectedQuestions.includes(q)
+    );
+
+    if (availableQuestions.length > 0) {
+      const newQuestion = availableQuestions[
+        Math.floor(Math.random() * availableQuestions.length)
+      ];
+      selectedQuestions.splice(index, 0, newQuestion);
+    }
+
+    loadQuestion();
+  }
+
+  // 🔥 Quitar foco
+  document.activeElement.blur();
+}
+
+// Identificar categoría
+function getQuestionCategory(q) {
+  if (questionsFacil.includes(q)) return questionsFacil;
+  if (questionsMedia.includes(q)) return questionsMedia;
+  if (questionsDificil.includes(q)) return questionsDificil;
+  if (prueba.includes(q)) return prueba;
+  return [];
+}
+
+/* =====================================================
+   🔊 AUDIO DE POWER-UPS
+===================================================== */
+
+let powerAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let powerAudioUnlocked = false;
+
+function unlockPowerAudio() {
+  if (!powerAudioUnlocked) {
+    powerAudioCtx.resume();
+    powerAudioUnlocked = true;
+  }
+}
+
+// ==== Sonidos de power-ups ====
+const powerSounds = {
+  extraTime: new Audio("sounds/bonus-t.mp3"),
+  removeOption: new Audio("sounds/eliminate-op.mp3"),
+  swapQuestion: new Audio("sounds/swap-q.mp3")
+};
+
+// Función para reproducir sonido de power-up
+function playPowerSound(type) {
+  if (powerSounds[type]) {
+    powerSounds[type].currentTime = 0; // reinicia si ya estaba sonando
+    powerSounds[type].play();
+  }
+}
+
+// ==== Modificar el uso de power-ups ====
+function usePowerUp(type) {
+  if (powerUps[type] <= 0) return;
+
+  powerUps[type]--;
+  updatePowerUpsDisplay();
+
+  // Reproducir sonido
+  playPowerSound(type);
+
+  switch(type) {
+    case "extraTime":
+      time = Math.min(time + 5, timePerQuestion);
+      animateExtraTime();
+      updateTimeBar();
+      break;
+    case "removeOption":
+      removeToTwoOptionsWithAnimation();
+      break;
+  }
+}
+
+//sonidos de los power-ups
+
+function useSwapQuestionPowerUp() {
+  if (powerUps.swapQuestion <= 0) return;
+
+  powerUps.swapQuestion--;
+  updatePowerUpsDisplay();
+
+  // Sonido swap
+  playPowerSound("swapQuestion");
 
   const msg = document.createElement("div");
   msg.className = "floating-message power-up swap";
@@ -128,13 +233,4 @@ function useSwapQuestionPowerUp() {
 
     loadQuestion(); 
   }
-}
-
-// Función para identificar la categoría de la pregunta
-function getQuestionCategory(q){
-  if(questionsFacil.includes(q)) return questionsFacil;
-  if(questionsMedia.includes(q)) return questionsMedia;
-  if(questionsDificil.includes(q)) return questionsDificil;
-  if(prueba.includes(q)) return prueba;
-  return [];
 }

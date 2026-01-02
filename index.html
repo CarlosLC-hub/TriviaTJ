@@ -5,6 +5,7 @@
   <title>Trivia Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- ESTILOS -->
   <link rel="stylesheet" href="style-base.css">
   <link rel="stylesheet" href="style-effect.css">
   <link rel="stylesheet" href="style-powers.css">
@@ -16,11 +17,11 @@
   <div class="pantalla-contenido">
     <div class="emojis">🎮🎮🎮</div>
     <h1>TRIVIA GAME</h1>
-    <button class="difficulty" onclick="showDifficultyMenu()">▶️ Jugar</button>
+    <button class="difficulty" onclick="promptPlayerName()">▶️ Jugar</button>
   </div>
 </div>
 
-<!-- ===== MENÚ SELECCIÓN DE DIFICULTAD ===== -->
+<!-- ===== MENÚ DE CATEGORÍA ===== -->
 <div id="menu" class="pantalla">
   <div class="pantalla-contenido">
     <h1>Selecciona dificultad</h1>
@@ -37,6 +38,7 @@
 <!-- ===== JUEGO ===== -->
 <div id="game" class="pantalla">
   <div class="pantalla-contenido">
+
     <div class="hud">
       <div id="vidas">❤️❤️❤️</div>
       <div class="barra-tiempo">
@@ -49,10 +51,11 @@
     <div id="answers"></div>
 
     <div id="power-ups">
-      <button class="power-btn" onclick="usePowerUp('extraTime')" id="powerExtraTime">⏱️ +5s (2)</button>
-      <button class="power-btn" onclick="useSwapQuestionPowerUp()" id="powerSwap">🔄 Cambiar pregunta (1)</button>
-      <button class="power-btn" onclick="usePowerUp('removeOption')" id="powerRemove">❌ 50/50 (1)</button>
+      <button class="power-btn" id="powerExtraTime" onclick="usePowerUp('extraTime')">⏱️ +5s (2)</button>
+      <button class="power-btn" id="powerSwap" onclick="useSwapQuestionPowerUp()">🔄 Cambiar pregunta (1)</button>
+      <button class="power-btn" id="powerRemove" onclick="usePowerUp('removeOption')">❌ Reducir opciones (1)</button>
     </div>
+
   </div>
 </div>
 
@@ -62,38 +65,112 @@
     <h2 id="endTitle"></h2>
     <p>Puntaje final: <span id="finalScore"></span></p>
     <p id="percentage"></p>
+
     <div id="stars"></div>
+
     <div class="difficulty-container">
       <button class="difficulty" onclick="retryGame()">🔁 Reintentar</button>
+      <button class="difficulty" onclick="backToMain()">🏠 Menú principal</button>
     </div>
   </div>
 </div>
 
-<!-- ===== SCRIPTS ===== -->
-<script>
-function hideAllScreens() {
-  document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("activa"));
-}
+<!-- ===== FIREBASE ===== -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+  import { 
+    getFirestore, 
+    doc, 
+    setDoc,           
+    getDoc 
+  } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-function showDifficultyMenu() {
-  hideAllScreens();
-  document.getElementById("menu").classList.add("activa");
-}
+  const firebaseConfig = {
+    apiKey: "AIzaSyAIMormQk971x6UpOvY-IRJKmYdDVG3LkI",
+    authDomain: "trivia-f0c84.firebaseapp.com",
+    projectId: "trivia-f0c84",
+    storageBucket: "trivia-f0c84.firebasestorage.app",
+    messagingSenderId: "176201187022",
+    appId: "1:176201187022:web:c09989347829d07f2fda9f"
+  };
 
-function backToMain() {
-  hideAllScreens();
-  document.getElementById("mainMenu").classList.add("activa");
-}
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Guarda SOLO si es mejor porcentaje
+window.saveScore = async (name, percentage) => {
+  try {
+    const cleanId = name.trim().toLowerCase();
+    const ref = doc(db, "scores", cleanId);
+    const snap = await getDoc(ref);
+
+    if (!snap.exists()) {
+      // Jugador nuevo
+      await setDoc(ref, {
+        name: name.trim(),
+        percentage,
+        date: Date.now()
+      });
+      console.log("Nuevo jugador guardado");
+      return;
+    }
+
+    const prevPercentage = snap.data().percentage;
+
+    if (percentage > prevPercentage) {
+      await setDoc(ref, {
+        name: name.trim(),
+        percentage,
+        date: Date.now()
+      });
+      console.log("Resultado actualizado");
+    } else {
+      console.log("No mejoró el resultado");
+    }
+
+  } catch (e) {
+    console.error("Error Firebase:", e);
+  }
+};
+
 </script>
 
+
+<!-- ===== SCRIPTS DEL JUEGO ===== -->
 <script src="questions-facil.js"></script>
 <script src="questions-media.js"></script>
 <script src="questions-dificil.js"></script>
 <script src="prueba.js"></script>
-<script src="game-powers.js"></script>
+
 <script src="game-timer.js"></script>
+<script src="game-powers.js"></script>
 <script src="game-questions.js"></script>
 <script src="game-result.js"></script>
+
+<script>
+  // Variable global del jugador
+  let playerName = "";
+
+  function promptPlayerName(){
+    if(!playerName){
+      const name = prompt("¡Escribe tu nombre y apellido para el guardar tu puntuación!");
+      if(name && name.trim()){
+        playerName = name.trim();
+      } else {
+        alert("Debes ingresar un nombre para jugar.");
+        return;
+      }
+    }
+    showCategoryMenu();
+  }
+
+  function showCategoryMenu(){
+    document.getElementById("mainMenu").classList.remove("activa");
+    document.getElementById("menu").classList.add("activa");
+  }
+
+
+</script>
 
 </body>
 </html>
