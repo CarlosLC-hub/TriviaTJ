@@ -121,7 +121,7 @@ window.saveScore = async (name, percentage) => {
       await setDoc(ref, {
         name: name.trim(),
         percentage,
-        date: Date.now()
+        date: new Date().toLocaleString("es-MX")
       });
       console.log("Resultado actualizado");
     } else {

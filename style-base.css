@@ -161,3 +161,17 @@ button.difficulty {
   75% { transform: translateX(-5px); }
   100% { transform: translateX(0); }
 }
+
+#question {
+  font-size: 16px;      /* Tamaño más pequeño que antes */
+  line-height: 1.4;     /* Mejor separación entre líneas */
+  margin-bottom: 10px;  /* Espacio debajo de la pregunta */
+  word-wrap: break-word; /* Rompe líneas largas */
+  text-align: center;    /* Centrar pregunta */
+}
+@media (max-width: 480px) {
+  #question {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+}

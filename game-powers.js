@@ -31,28 +31,35 @@ function updatePowerUpsDisplay() {
   swapBtn.style.opacity = powerUps.swapQuestion > 0 ? "1" : "0.4";
 }
 
-// Uso de power-ups
+// ==== USO DE POWER-UPS ====
 function usePowerUp(type) {
+  const btn = {
+    extraTime: document.getElementById("powerExtraTime"),
+    removeOption: document.getElementById("powerRemove"),
+    swapQuestion: document.getElementById("powerSwap")
+  }[type];
+
   if (powerUps[type] <= 0) return;
 
   powerUps[type]--;
   updatePowerUpsDisplay();
+  playPowerSound(type);
+
+  // Desactivar temporalmente hover pegado en móviles
+  btn.classList.add("no-hover");
+  setTimeout(() => btn.classList.remove("no-hover"), 50);
 
   switch(type) {
     case "extraTime":
-      playPowerSound("time");
       time = Math.min(time + 5, timePerQuestion);
       animateExtraTime();
       updateTimeBar();
       break;
-
     case "removeOption":
-      playPowerSound("remove");
       removeToTwoOptionsWithAnimation();
       break;
   }
 
-  // 🔥 Quitar foco para evitar brillo pegado
   document.activeElement.blur();
 }
 
@@ -105,112 +112,16 @@ function initPowerUps() {
 
 // ==== POWER-UP: INTERCAMBIO DE PREGUNTA ====
 function useSwapQuestionPowerUp() {
+  const btn = document.getElementById("powerSwap");
   if (powerUps.swapQuestion <= 0) return;
 
   powerUps.swapQuestion--;
   updatePowerUpsDisplay();
-  playPowerSound("swap");
-
-  const msg = document.createElement("div");
-  msg.className = "floating-message power-up swap";
-  msg.innerText = "¡Pregunta cambiada! 🔄";
-  document.body.appendChild(msg);
-  setTimeout(() => msg.remove(), 1200);
-
-  if (index < selectedQuestions.length - 1) {
-    const currentQuestion = selectedQuestions[index];
-    const category = getQuestionCategory(currentQuestion);
-
-    selectedQuestions.splice(index, 1);
-
-    const availableQuestions = category.filter(
-      q => !selectedQuestions.includes(q)
-    );
-
-    if (availableQuestions.length > 0) {
-      const newQuestion = availableQuestions[
-        Math.floor(Math.random() * availableQuestions.length)
-      ];
-      selectedQuestions.splice(index, 0, newQuestion);
-    }
-
-    loadQuestion();
-  }
-
-  // 🔥 Quitar foco
-  document.activeElement.blur();
-}
-
-// Identificar categoría
-function getQuestionCategory(q) {
-  if (questionsFacil.includes(q)) return questionsFacil;
-  if (questionsMedia.includes(q)) return questionsMedia;
-  if (questionsDificil.includes(q)) return questionsDificil;
-  if (prueba.includes(q)) return prueba;
-  return [];
-}
-
-/* =====================================================
-   🔊 AUDIO DE POWER-UPS
-===================================================== */
-
-let powerAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-let powerAudioUnlocked = false;
-
-function unlockPowerAudio() {
-  if (!powerAudioUnlocked) {
-    powerAudioCtx.resume();
-    powerAudioUnlocked = true;
-  }
-}
-
-// ==== Sonidos de power-ups ====
-const powerSounds = {
-  extraTime: new Audio("sounds/bonus-t.mp3"),
-  removeOption: new Audio("sounds/eliminate-op.mp3"),
-  swapQuestion: new Audio("sounds/swap-q.mp3")
-};
-
-// Función para reproducir sonido de power-up
-function playPowerSound(type) {
-  if (powerSounds[type]) {
-    powerSounds[type].currentTime = 0; // reinicia si ya estaba sonando
-    powerSounds[type].play();
-  }
-}
-
-// ==== Modificar el uso de power-ups ====
-function usePowerUp(type) {
-  if (powerUps[type] <= 0) return;
-
-  powerUps[type]--;
-  updatePowerUpsDisplay();
-
-  // Reproducir sonido
-  playPowerSound(type);
-
-  switch(type) {
-    case "extraTime":
-      time = Math.min(time + 5, timePerQuestion);
-      animateExtraTime();
-      updateTimeBar();
-      break;
-    case "removeOption":
-      removeToTwoOptionsWithAnimation();
-      break;
-  }
-}
-
-//sonidos de los power-ups
-
-function useSwapQuestionPowerUp() {
-  if (powerUps.swapQuestion <= 0) return;
-
-  powerUps.swapQuestion--;
-  updatePowerUpsDisplay();
-
-  // Sonido swap
   playPowerSound("swapQuestion");
+
+  // Desactivar temporalmente hover pegado
+  btn.classList.add("no-hover");
+  setTimeout(() => btn.classList.remove("no-hover"), 50);
 
   const msg = document.createElement("div");
   msg.className = "floating-message power-up swap";
@@ -225,12 +136,45 @@ function useSwapQuestionPowerUp() {
     selectedQuestions.splice(index, 1);
 
     const availableQuestions = category.filter(q => !selectedQuestions.includes(q));
-
     if(availableQuestions.length > 0){
       const newQuestion = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
       selectedQuestions.splice(index, 0, newQuestion);
     }
 
-    loadQuestion(); 
+    loadQuestion();
+  }
+
+  document.activeElement.blur();
+}
+
+// Identificar categoría
+function getQuestionCategory(q) {
+  if (questionsFacil.includes(q)) return questionsFacil;
+  if (questionsMedia.includes(q)) return questionsMedia;
+  if (questionsDificil.includes(q)) return questionsDificil;
+  if (prueba.includes(q)) return prueba;
+  return [];
+}
+
+// ==== SONIDOS DE POWER-UPS ====
+let powerAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let powerAudioUnlocked = false;
+function unlockPowerAudio() {
+  if (!powerAudioUnlocked) {
+    powerAudioCtx.resume();
+    powerAudioUnlocked = true;
+  }
+}
+
+const powerSounds = {
+  extraTime: new Audio("sounds/bonus-t.mp3"),
+  removeOption: new Audio("sounds/eliminate-op.mp3"),
+  swapQuestion: new Audio("sounds/swap-q.mp3")
+};
+
+function playPowerSound(type) {
+  if (powerSounds[type]) {
+    powerSounds[type].currentTime = 0;
+    powerSounds[type].play();
   }
 }

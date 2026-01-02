@@ -1,6 +1,6 @@
 /* ==== CONTENEDOR DE POWER-UPS ==== */
 #power-ups {
-  display: none;
+  display: flex;
   justify-content: center;
   gap: 10px;
   margin-top: 15px;
@@ -19,11 +19,19 @@
   color: black;
   text-shadow: 1px 1px 2px #000;
   transition: transform 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s, opacity 0.2s;
+  min-width: 80px;
+  max-width: 140px;
+  width: 100%;
+}
 
-  min-width: 120px;
-  max-width: 200px;
-  margin: 10px;
-  display: inline-block;
+/* Evitar hover pegado en móviles */
+.power-btn.no-hover,
+.power-btn.no-hover:hover {
+  transform: none !important;
+  background: linear-gradient(45deg, #00ffcc, #0066ff) !important;
+  box-shadow: none !important;
+  font-weight: 400 !important;
+  color: black !important;
 }
 
 .power-btn:hover:not(:disabled) {
@@ -40,7 +48,7 @@
   box-shadow: none;
 }
 
-/* ==== MENSAJES FLOTANTES DE POWER-UPS ==== */
+/* ==== MENSAJES FLOTANTES ==== */
 .floating-message.power-up,
 .floating-message.swap {
   position: fixed;
