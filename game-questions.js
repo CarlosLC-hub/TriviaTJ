@@ -47,11 +47,11 @@ function chooseDifficulty(level){
       maxQuestions = 20;
       allQuestions = questionsDificil;
       break;
-    case "prueba":
+    /*case "prueba":
       timePerQuestion = 7;
       maxQuestions = 5;
       allQuestions = prueba;
-      break;
+      break; */
   }
 
   selectedQuestions = shuffleArray([...allQuestions]).slice(0, maxQuestions);
