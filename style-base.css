@@ -37,7 +37,7 @@ body {
 /* Título principal */
 h1 {
     font-family: 'Lucida Sans', sans-serif;
-    font-size: clamp(3rem, 6vw, 5rem);  /* grande y adaptable a pantalla */
+    font-size: clamp(3em, 6vw, 5rem);  /* grande y adaptable a pantalla */
     margin: 0 0 20px 0;       /* separa del botón */
     text-align: center;
 }
@@ -50,6 +50,13 @@ h1 {
     h1 {
         font-size: 6vw;      /* mantiene título visible pero adaptable */
     }
+}
+
+/* PREGUNTAS */
+h3 {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 18px;
 }
 
 
@@ -162,16 +169,4 @@ button.difficulty {
   100% { transform: translateX(0); }
 }
 
-#question {
-  font-size: 16px;      /* Tamaño más pequeño que antes */
-  line-height: 1.4;     /* Mejor separación entre líneas */
-  margin-bottom: 10px;  /* Espacio debajo de la pregunta */
-  word-wrap: break-word; /* Rompe líneas largas */
-  text-align: center;    /* Centrar pregunta */
-}
-@media (max-width: 480px) {
-  #question {
-    font-size: 14px;
-    line-height: 1.3;
-  }
-}
+

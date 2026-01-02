@@ -47,7 +47,7 @@
       <div>⭐ <span id="score">0</span></div>
     </div>
 
-    <h2 id="question"></h2>
+    <h3 id="question"></h3>
     <div id="answers"></div>
 
     <div id="power-ups">
@@ -97,19 +97,29 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // Guarda SOLO si es mejor porcentaje
+// Guarda SOLO si es mejor porcentaje
 window.saveScore = async (name, percentage) => {
   try {
-    const cleanId = name.trim().toLowerCase();
+    const cleanId = name.trim().toLowerCase(); // ID único por jugador
     const ref = doc(db, "scores", cleanId);
     const snap = await getDoc(ref);
+
+    const now = new Date();
+    const readableDate = now.toLocaleString("es-MX", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    });
 
     if (!snap.exists()) {
       // Jugador nuevo
       await setDoc(ref, {
         name: name.trim(),
         percentage,
-        date: Date.now()
+        date: readableDate
       });
       console.log("Nuevo jugador guardado");
       return;
@@ -121,7 +131,7 @@ window.saveScore = async (name, percentage) => {
       await setDoc(ref, {
         name: name.trim(),
         percentage,
-        date: new Date().toLocaleString("es-MX")
+        date: readableDate
       });
       console.log("Resultado actualizado");
     } else {
@@ -132,6 +142,7 @@ window.saveScore = async (name, percentage) => {
     console.error("Error Firebase:", e);
   }
 };
+
 
 </script>
 
