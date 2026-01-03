@@ -22,7 +22,7 @@ const questionsFacil = [
  /*20*/ { q: "Sansón fue el más fuerte, el más sabio Salomón, el más valiente fue David, pero, ¿a quién le duró más el corazón?", a:["Jacob", "Matusalén", "Adán"], c: 1, difficulty: "facil"},
  /*21*/ { q: "Mala reputación ella tenía, pero en Jehová confió, por su fe se salvaría al llegar la destrucción, ¿Quién fue?", a:["Rahab", "María", "La hija de Jefté"], c: 0, difficulty: "facil"},
  /*22*/ { q: "Aunque sea muy pequeña no es pequeño su poder, pues por más pequeña que sea, grandes cosas puede hacer. ¿Qué es?", a:["La oración", "La Biblia", "La fe"], c: 2, difficulty: "facil"},
- /*23*/ { q: "No por un diluvio, sino por ser salvador, siendo muy joven entró en el arca, sin saber que más tarde cruzaría el mar sin necesidad de una barca. ¿Quién fue?", a:["Noé", "Moisés", "Jesús"], c: 1, difficulty: "facil"},
+ /*23*/ { q: "No por un diluvio, sino por ser salvado, siendo muy joven entró en el arca, sin saber que más tarde cruzaría el mar sin necesidad de una barca. ¿Quién fue?", a:["Noé", "Moisés", "Jesús"], c: 1, difficulty: "facil"},
  /*24*/ { q: "No murió en el agua, aunque estuvo rodeado por ella; no usó arma, pero derrotó a un ejército. ¿Quién fue?", a:["Moisés", "Gedeón", "David"], c: 0, difficulty: "facil"},
  /*25*/ { q: "Fue profeta sin escribir profecía, hizo caer fuego del cielo y no conoció la muerte. ¿Quién fue?", a:["Eliseo", "Ezequiel", "Elías"], c: 2, difficulty: "facil"},
  /*26*/ { q: "De Goliat el antónimo, de fiel y arrepentido el sinónimo. ¿Quién fue?", a:["Jesús", "Zaqueo", "Pedro"], c: 1, difficulty: "facil"},
@@ -30,6 +30,7 @@ const questionsFacil = [
  /*28*/ { q: "¿Cuántos días tardó Jehová en crear todas las cosas? ", a:["7", "5", "6"], c: 2, difficulty: "facil"},
  /*29*/ { q: "¿Cuántos panes y peces usó Jesús para alimentar a las 5000 personas?", a:["2 panes y 5 peces", "5 panes y 2 peces", "5 panes y 5 peces"], c: 1, difficulty: "facil"},
  /*30*/ { q: "¿Qué ciudad es conocida como la ciudad de David?", a:["Belén", "Jerusalén", "Hebrón"], c: 1, difficulty: "facil"},
+
 
 
 ]
