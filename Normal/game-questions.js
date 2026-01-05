@@ -11,11 +11,11 @@ let currentDifficulty = ""; // guardará 'facil', 'media' o 'dificil'
 
 
 // ==== SONIDOS ====  
-const soundCorrect = new Audio("../sounds/correct.mp3");
-const soundWrong = new Audio("../sounds/wrong.mp3");
-const soundVictory = new Audio("../sounds/victory.mp3");
-const soundGameOver = new Audio("../sounds/gameover.mp3");
-const soundContinue = new Audio("../sounds/continue.mp3");
+const soundCorrect = new Audio("sounds/correct.mp3");
+const soundWrong = new Audio("sounds/wrong.mp3");
+const soundVictory = new Audio("sounds/victory.mp3");
+const soundGameOver = new Audio("sounds/gameover.mp3");
+const soundContinue = new Audio("sounds/continue.mp3");
 
 soundCorrect.volume = 0.6;
 soundWrong.volume = 0.6;
