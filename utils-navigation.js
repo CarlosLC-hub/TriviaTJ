@@ -5,5 +5,5 @@ function goToMainMenu() {
   }
 
   // Redirigir al menú principal
-  window.location.href = "index.html";
+  window.location.href = "../index.html";
 }
