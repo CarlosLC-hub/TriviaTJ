@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trivia Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ESTILOS -->
+  <link rel="stylesheet" href="style-base.css">
+  <link rel="stylesheet" href="style-effect.css">
+  <link rel="stylesheet" href="style-powers.css">
+</head>
+<body>
+
+<!-- ===== MENÚ PRINCIPAL ===== -->
+<div id="mainMenu" class="pantalla activa">
+  <div class="pantalla-contenido">
+    <div class="emojis">🟢🟠🔴</div>
+    <h1>Modo Normal</h1>
+    <button class="difficulty" onclick="promptPlayerName()">▶️ Jugar</button>
+    <div> <button id="btnMainMenu" onclick="goToMainMenu()">🏠 Volver al menú principal</button> </div>
+  </div>
+</div>
+
+<!-- ===== MENÚ DE CATEGORÍA ===== -->
+<div id="menu" class="pantalla">
+  <div class="pantalla-contenido">
+    <h1>Selecciona dificultad</h1>
+    <div class="difficulty-container">
+      <button class="difficulty" onclick="chooseDifficulty('facil')">🟢 Fácil</button>
+      <button class="difficulty" onclick="chooseDifficulty('media')">🟡 Medio</button>
+      <button class="difficulty" onclick="chooseDifficulty('dificil')">🔴 Difícil</button>
+      <!-- =====<button class="difficulty" onclick="chooseDifficulty('prueba')">🧐 Prueba</button> ===== -->
+    </div>
+    <button class="difficulty" onclick="backToMain()">⬅️ Volver</button>
+  </div>
+</div>
+
+<!-- ===== JUEGO ===== -->
+<div id="game" class="pantalla">
+  <div class="pantalla-contenido">
+
+    <div class="hud">
+      <div id="vidas">❤️❤️❤️</div>
+      <div class="barra-tiempo">
+        <div id="tiempo-barra"></div>
+      </div>
+      <div>⭐ <span id="score">0</span></div>
+    </div>
+
+    <h3 id="question"></h3>
+    <div id="answers"></div>
+
+    <div id="power-ups" class="power-ups-container">
+      <button class="power-btn" id="powerExtraTime" onclick="usePowerUp('extraTime')">⏱️ +5s (2)</button>
+      <button class="power-btn" id="powerSwap" onclick="useSwapQuestionPowerUp()">🔄 Cambiar pregunta (1)</button>
+      <button class="power-btn" id="powerRemove" onclick="usePowerUp('removeOption')">❌ Reducir opciones (1)</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== FINAL ===== -->
+<div id="end" class="pantalla">
+  <div class="pantalla-contenido">
+    <h2 id="endTitle"></h2>
+    <p>Puntaje final: <span id="finalScore"></span></p>
+    <p id="percentage"></p>
+
+    <div id="stars"></div>
+
+    <div class="difficulty-container">
+      <button class="difficulty" onclick="retryGame()">🔁 Reintentar</button>
+       <div> <button id="btnMainMenu" onclick="goToMainMenu()">🏠 Volver al menú principal</button> </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== FIREBASE ===== -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+  import { 
+    getFirestore, 
+    doc, 
+    setDoc,           
+    getDoc 
+  } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAIMormQk971x6UpOvY-IRJKmYdDVG3LkI",
+    authDomain: "trivia-f0c84.firebaseapp.com",
+    projectId: "trivia-f0c84",
+    storageBucket: "trivia-f0c84.firebasestorage.app",
+    messagingSenderId: "176201187022",
+    appId: "1:176201187022:web:c09989347829d07f2fda9f"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // FUNCION PARA GUARDAR SCORE
+  async function saveScore(name, percentage, currentDifficulty){
+    try {
+      const cleanId = name.trim().toLowerCase() + "-" + currentDifficulty;
+      const ref = doc(db, "scores", cleanId);
+      const snap = await getDoc(ref);
+
+      const now = new Date();
+      const readableDate = now.toLocaleString("es-MX", { 
+        year:"numeric", month:"2-digit", day:"2-digit", 
+        hour:"2-digit", minute:"2-digit", second:"2-digit" 
+      });
+
+      if(!snap.exists() || percentage > snap.data().percentage){
+        await setDoc(ref, {
+          name: name.trim(),
+          percentage,
+          currentDifficulty,
+          date: readableDate
+        });
+        console.log("Resultado guardado/actualizado");
+      } else {
+        console.log("No mejoró el resultado");
+      }
+    } catch(e){
+      console.error("Error Firebase:", e);
+    }
+  }
+  
+  // ===== HACERLA ACCESIBLE GLOBALMENTE =====
+  window.saveScore = saveScore; 
+</script>
+
+
+<!-- ===== SCRIPTS DEL JUEGO ===== -->
+  <script src="../utils-navigation.js"></script>
+  <script src="../questions/questions-dificil.js"></script>
+  <script src="../questions/questions-media.js"></script>
+  <script src="../questions/questions-facil.js"></script>
+<!-- ===== <script src="../questions/prueba.js"></script>  ===== -->
+
+<script src="game-timer.js"></script>
+<script src="game-powers.js"></script>
+<script src="game-questions.js"></script>
+<script src="game-result.js"></script>
+
+<script>
+  // Variable global del jugador
+  let playerName = "";
+
+  function promptPlayerName(){
+    if(!playerName){
+      const name = prompt("¡Escribe tu nombre y apellido para el guardar tu puntuación!");
+      if(name && name.trim()){
+        playerName = name.trim();
+      } else {
+        alert("Debes ingresar un nombre para jugar.");
+        return;
+      }
+    }
+    showCategoryMenu();
+  }
+
+  function showCategoryMenu(){
+    document.getElementById("mainMenu").classList.remove("activa");
+    document.getElementById("menu").classList.add("activa");
+  }
+
+
+</script>
+
+</body>
+</html>

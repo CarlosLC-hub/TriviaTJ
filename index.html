@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trivia TJ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+
+<div class="menu-container">
+  <h1><p>¿Listo para probar cuánto sabes?</p></h1>
+          <h2>  Elige un modo de juego  </h2>
+
+  <div class="menu-buttons">
+    <button onclick="goNormal()">Modo Normal</button>
+    <button onclick="goZen()">Modo Zen</button>
+  </div>
+</div>
+
+
+  <script>
+    function goNormal() {
+      window.location.href = "normal/normal.html";
+    }
+
+    function goZen() {
+      window.location.href = "zen/zen.html";
+    }
+  </script>
+
+</body>
+</html>

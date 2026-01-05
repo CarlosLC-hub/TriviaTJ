@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Modo Zen</title>   
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style-base.css">
+
+  <!-- PREGUNTAS -->
+  <script src="../questions/questions-dificil.js"></script>
+  <script src="../questions/questions-media.js"></script>
+  <script src="../questions/questions-facil.js"></script>
+</head>
+<body>
+
+<!-- ===== MENÚ PRINCIPAL ===== -->
+<div id="mainMenu" class="pantalla activa">
+  <div class="pantalla-contenido">
+    <div class="emojis">😌✨</div>
+    <h1>Modo Zen</h1>
+    <button onclick="goToAmount()">▶️ Jugar</button>
+  </div>
+    <div> <button id="btnMainMenu" onclick="goToMainMenu()">🏠 Volver al menú principal</button> </div>
+</div>
+
+<!-- ===== SELECCIÓN DE CANTIDAD ===== -->
+<div id="amountMenu" class="pantalla">
+  <div class="pantalla-contenido">
+    <h1>¿Cuántas preguntas?</h1>
+    <button onclick="startGame(20)">20🟢</button>
+    <button onclick="startGame(30)">30🟠</button>
+    <button onclick="startGame(40)">40🔴</button>
+    <button onclick="startGame(50)">50⚡</button>
+    <button onclick="startGame(7)">🧪 Prueba (7)</button>
+    <br><br>
+    <button onclick="backToMain()">⬅️ Volver</button>
+  </div>
+</div>
+
+<!-- ===== JUEGO ===== -->
+<div id="game" class="pantalla">
+  <div class="pantalla-contenido">
+
+    <!-- HUD -->
+    <div class="hud">
+      <span id="counter">Pregunta 1</span>
+      <span id="combo" class="combo">x1</span>
+    </div>
+
+    <h3 id="question"></h3>
+
+    <div id="answers"></div>
+
+      <div id="powerMsgContainer">
+      <span id="powerMsg"></span>
+      </div>
+    <!-- POWER UPS -->
+    <div id="powerUps" class="power-ups-container">
+      <button id="swapBtn" onclick="swapQuestion()">🔄 Cambiar pregunta</button>
+      <button id="eliminateBtn" onclick="eliminateOptions()">❌ Reducir opciones</button>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== FINAL ===== -->
+<div id="result" class="pantalla">
+  <div class="pantalla-contenido">
+    <h1 id="resultEmoji">🎉</h1>
+    <h3 id="resultText"></h3>
+    <p id="resultStats"></p>
+    <button onclick="goToAmount()">🔁 Volver</button>
+  </div>
+   <div> <button id="btnMainMenu" onclick="goToMainMenu()">🏠 Volver al menú principal</button> </div>
+</div>
+<script src="../utils-navigation.js"></script>
+<script src="game-zen.js"></script>
+</body>
+</html>
