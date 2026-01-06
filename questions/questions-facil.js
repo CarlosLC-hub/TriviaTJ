@@ -7,7 +7,7 @@ const questionsFacil = [
   /*5*/ { q: "¿Qué apóstol negó a Jesús 3 veces?", a: ["Tomás", "Pedro", "Judas"], c: 1, difficulty: "facil"},
   /*6*/ { q: "¿Cuál es el evangelio con menos capítulos?", a:["Mateo", "Marcos", "Lucas", "Juan"], c: 1, difficulty: "facil"},
   /*7*/ { q: "¿Cómo se llama el grupo de personas que dirige la organización a nivel mundial?", a: ["Ancianos de congregación", "Ungidos", "Cuerpo Gobernante"], c: 2, difficulty: "facil"},
-  /*8*/ { q: "¿Cuántos hombre escribieron la Biblia?", a: ["44", "33", "40"], c: 2, difficulty: "facil"},
+  /*8*/ { q: "¿Cuántos hombres escribieron la Biblia?", a: ["44", "33", "40"], c: 2, difficulty: "facil"},
   /*9*/ { q: "Cierto o falso: el número <span class='resaltar'> total </span> de los hijos e hijas de Jacob fue de 12", a: ["Cierto", "Falso"], c: 1, difficulty: "facil"},
  /*10*/ { q: "¿Cuál es el séptimo libro de la Biblia?", a: ["Josué", "Esdras", "Jueces"], c: 2, difficulty: "facil"},
  /*11*/ { q: "¿Cuál es el libro de la Biblia que tiene más capítulos?", a: ["Salmos", "Proverbios", "Números"], c: 0, difficulty: "facil"},
@@ -17,7 +17,7 @@ const questionsFacil = [
  /*15*/ { q: "¿En qué año se adoptó el nombre de Testigos de Jehová?", a: ["1931", "1914", "1824"], c: 0, difficulty: "facil"},
  /*16*/ { q: "¿Quién se disgustó con Jehová por no haber destruido Nínive?", a:["Elías", "Jonás", "Esdras"], c: 1, difficulty: "facil"},
  /*17*/ { q: "¿Quién fue el padre de Juan el Bautista?", a:["Zorobabel", "Zacarías", "Sedequías"], c: 1, difficulty: "facil"},
- /*18*/ { q: "La curiosidad es vicio que debemos evitar, a quien no supo vencerlo el vicio le fue fatal ¿Quién fue?", a:["La esposa de Lot", "Judas", "David"], c: 0, difficulty: "facil"},
+ /*18*/ { q: "La curiosidad es un vicio que debemos evitar, a quien no supo vencerlo el vicio le fue fatal. ¿Quién fue?", a:["La esposa de Lot", "Judas", "David"], c: 0, difficulty: "facil"},
  /*19*/ { q: "Aunque estas llevan a la muerte, no siempre ocurrió así. Hubo una que dio vida, ¿de quién se habla aquí?", a:["El becerro de oro", "Las estatuas de plata", "La serpiente de cobre"], c: 2, difficulty: "facil"},
  /*20*/ { q: "Sansón fue el más fuerte, el más sabio Salomón, el más valiente fue David, pero, ¿a quién le duró más el corazón?", a:["Jacob", "Matusalén", "Adán"], c: 1, difficulty: "facil"},
  /*21*/ { q: "Mala reputación ella tenía, pero en Jehová confió, por su fe se salvaría al llegar la destrucción, ¿Quién fue?", a:["Rahab", "María", "La hija de Jefté"], c: 0, difficulty: "facil"},
@@ -28,7 +28,7 @@ const questionsFacil = [
  /*26*/ { q: "De Goliat el antónimo, de fiel y arrepentido el sinónimo. ¿Quién fue?", a:["Jesús", "Zaqueo", "Pedro"], c: 1, difficulty: "facil"},
  /*27*/ { q: "Un hombre habló y el sol no se ocultó; otro habló y el sol cambió su curso. No fue una orden de guerra ni un mandato público, sino una señal pedida en silencio. ¿Quién fue?", a:["Ezequías", "Josué", "Elías"], c: 0, difficulty: "facil"},
  /*28*/ { q: "¿Cuántos días tardó Jehová en crear todas las cosas? ", a:["7", "5", "6"], c: 2, difficulty: "facil"},
- /*29*/ { q: "¿Cuántos panes y peces usó Jesús para alimentar a las 5000 personas?", a:["2 panes y 5 peces", "5 panes y 2 peces", "5 panes y 5 peces"], c: 1, difficulty: "facil"},
+ /*29*/ { q: "¿Cuántos panes y peces usó Jesús para alimentar a las 5 000 personas?", a:["2 panes y 5 peces", "5 panes y 2 peces", "5 panes y 5 peces"], c: 1, difficulty: "facil"},
  /*30*/ { q: "¿Qué ciudad es conocida como la ciudad de David?", a:["Belén", "Jerusalén", "Hebrón"], c: 1, difficulty: "facil"},
 
 
