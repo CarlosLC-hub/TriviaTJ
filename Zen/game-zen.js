@@ -261,9 +261,15 @@ function endGame() {
   const percent = Math.round((correct / totalQuestions) * 100);
   let emoji = "😢";
 
-  if (percent === 100) emoji = "🏆🥇🏆";
-  else if (percent > 50) emoji = "🎉🥈🎉";
-  else if (percent === 50) emoji = "😕🥉😕";
+  if (percent === 100) {
+    emoji = "🏆🥇🏆";
+
+  } else if (percent >= 80) {
+    emoji = "🎉🥈🎉";
+
+  } else if (percent >= 60) {
+    emoji = "😕🥉😕";
+  }
 
   $("resultEmoji").textContent = emoji;
   $("resultText").textContent = `Resultado: ${percent}%`;
@@ -271,7 +277,7 @@ function endGame() {
 
   show("result");
 
-    // 🎵 sonido final zen
+  // 🎵 sonido final zen
   playSound(endZenSound);
-
 }
+
