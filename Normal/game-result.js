@@ -101,7 +101,7 @@ function endGame() {
 
   } else {
     // SIGUE PARTICIPANDO
-    endMessage = "😅 ¡UY! CASI PERFECTO";
+    endMessage = "✏️ SIGUE PARTICIPANDO";
     soundContinue.currentTime = 0;
     soundContinue.play();
 
