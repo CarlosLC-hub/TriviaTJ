@@ -12,34 +12,22 @@
 </head>
 <body>
 
-<!-- ===== MENÚ PRINCIPAL ===== -->
+<!-- ===== MENÚ MODO NORMAL ===== -->
 <div id="mainMenu" class="pantalla activa">
   <div class="pantalla-contenido">
-    <div class="emojis">🟢🟠🔴</div>
+
     <h1>Modo Normal</h1>
-    <button class="difficulty" onclick="showNameScreen()">▶️ Jugar</button>
-    <div>
-      <button id="btnMainMenu" onclick="goToMainMenu()">🏠 Volver al menú principal</button>
+
+    <div class="descripcion">
+      <p>🎯 Elige entre 3 dificultades</p>
+      <p>⏱️ Responde antes de que el tiempo termine</p>
+      <p>⭐ ¡Suma puntos por cada acierto!</p>
     </div>
-  </div>
-</div>
 
-<!-- ===== PANTALLA NOMBRE JUGADOR ===== -->
-<div id="nameScreen" class="pantalla">
-  <div class="pantalla-contenido">
-    <h2>Ingresa tu nombre</h2>
-
-    <input
-      type="text"
-      id="playerNameInput"
-      placeholder="Nombre y apellido"
-      style="padding:10px;font-size:16px;width:100%;max-width:300px;"
-    >
-
-    <br><br>
-
-    <button class="difficulty" onclick="confirmPlayerName()">Continuar ▶️</button>
-    <button class="difficulty" onclick="backToMain()">⬅️ Volver</button>
+    <div class="botones-modo">
+      <button class="difficulty" onclick="promptPlayerName()">▶️ Jugar</button>
+      <button class="ranking-btn" onclick="goRanking()">🏆 Ver Ranking</button>
+    </div>
   </div>
 </div>
 
@@ -51,8 +39,8 @@
       <button class="difficulty" onclick="chooseDifficulty('facil')">🟢 Fácil</button>
       <button class="difficulty" onclick="chooseDifficulty('media')">🟡 Medio</button>
       <button class="difficulty" onclick="chooseDifficulty('dificil')">🔴 Difícil</button>
+      <!-- <button class="difficulty" onclick="chooseDifficulty('prueba')">🧐 Prueba</button> -->
     </div>
-    <button class="difficulty" onclick="backToMain()">⬅️ Volver</button>
   </div>
 </div>
 
@@ -86,11 +74,11 @@
     <h2 id="endTitle"></h2>
     <p><span id="finalScore"></span></p>
     <p id="percentage"></p>
+
     <div id="stars"></div>
 
     <div class="difficulty-container">
       <button class="difficulty" onclick="retryGame()">🔁 Reintentar</button>
-      <button class="difficulty" onclick="goToMainMenu()">🏠 Volver al menú principal</button>
     </div>
   </div>
 </div>
@@ -98,7 +86,7 @@
 <!-- ===== FIREBASE ===== -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAIMormQk971x6UpOvY-IRJKmYdDVG3LkI",
@@ -112,24 +100,34 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  // FUNCION PARA GUARDAR SCORE (SIEMPRE ACTUALIZA)
   async function saveScore(name, percentage, currentDifficulty){
     try {
       const cleanId = name.trim().toLowerCase() + "-" + currentDifficulty;
       const ref = doc(db, "scores", cleanId);
-      const snap = await getDoc(ref);
 
       const now = new Date();
-      const readableDate = now.toLocaleString("es-MX");
+      const readableDate = now.toLocaleString("es-MX", { 
+        year:"numeric", month:"2-digit", day:"2-digit", 
+        hour:"2-digit", minute:"2-digit", second:"2-digit" 
+      });
 
-      if(!snap.exists() || percentage > snap.data().percentage){
-        await setDoc(ref, { name, percentage, currentDifficulty, date: readableDate });
-      }
+      await setDoc(ref, {
+        name: name.trim(),
+        percentage,
+        currentDifficulty,
+        date: readableDate
+      });
+
+      console.log("Resultado actualizado correctamente");
+
     } catch(e){
       console.error("Error Firebase:", e);
     }
   }
 
-  window.saveScore = saveScore;
+  // HACERLA ACCESIBLE GLOBALMENTE
+  window.saveScore = saveScore; 
 </script>
 
 <!-- ===== SCRIPTS DEL JUEGO ===== -->
@@ -137,6 +135,7 @@
 <script src="../questions/questions-dificil.js"></script>
 <script src="../questions/questions-media.js"></script>
 <script src="../questions/questions-facil.js"></script>
+<!-- <script src="../questions/prueba.js"></script> -->
 
 <script src="game-timer.js"></script>
 <script src="game-powers.js"></script>
@@ -144,27 +143,30 @@
 <script src="game-result.js"></script>
 
 <script>
-  let playerName = localStorage.getItem("playerName") || "";
+  // Variable global del jugador
+  let playerName = "";
 
-  function showNameScreen(){
-    document.getElementById("mainMenu").classList.remove("activa");
-    document.getElementById("nameScreen").classList.add("activa");
+  function promptPlayerName(){
+    if(!playerName){
+      const name = prompt("¡Escribe tu nombre y apellido para el guardar tu puntuación!");
+      if(name && name.trim()){
+        playerName = name.trim();
+      } else {
+        alert("Debes ingresar un nombre para jugar.");
+        return;
+      }
+    }
+    showCategoryMenu();
   }
 
-  function confirmPlayerName(){
-    const name = document.getElementById("playerNameInput").value.trim();
-    if(!name){
-      alert("Debes ingresar un nombre para jugar.");
-      return;
-    }
-    playerName = name;
-    localStorage.setItem("playerName", name);
-
-    document.getElementById("nameScreen").classList.remove("activa");
+  function showCategoryMenu(){
+    document.getElementById("mainMenu").classList.remove("activa");
     document.getElementById("menu").classList.add("activa");
   }
-</script>
 
+  function goRanking() {
+    window.location.href = "ranking.html";
+  }
+</script>
 </body>
 </html>
-

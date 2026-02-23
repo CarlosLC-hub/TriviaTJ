@@ -155,38 +155,6 @@ function retryGame() {
   resetCombo();
   clearInterval(timer);
 }
-  //Botón de volver
-function backToMain(){
-  // Ocultar todas las pantallas
-  document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("activa"));
 
-  // Mostrar el menú principal
-  document.getElementById("mainMenu").classList.add("activa");
-
-  
-
-  // --- REINICIAR JUEGO ---
-  index = 0;
-  score = 0;
-  lives = 3;
-  correctAnswers = 0;
-  maxScore = 0;
-
-  // Limpiar HUD
-  document.getElementById("score").innerText = score;
-  document.getElementById("vidas").innerHTML = "❤️❤️❤️";
-  document.getElementById("stars").innerHTML = "";
-  document.getElementById("finalScore").innerText = "";
-  document.getElementById("percentage").innerText = "";
-
-  // Limpiar racha
-  resetCombo(); 
-
-  // Ocultar power-ups si estaban visibles
-  hidePowerUps();
-
-  // Detener temporizador
-  clearInterval(timer);
-}
 
   

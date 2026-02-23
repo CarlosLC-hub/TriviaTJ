@@ -5,6 +5,24 @@ body {
   text-align: center;
 }
 
+.descripcion {
+  margin: 25px 0 35px 0;
+    color: #4fc3f7;
+  font-size: 16px;
+  line-height: 1.8;
+  opacity: 0.95;
+  animation: fadeIn 0.8s ease;
+}
+
+.descripcion p {
+  margin: 8px 0;
+}
+
+/* animación suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 /* ================= PANTALLAS ================= */
 .pantalla {
   display: none;
@@ -27,12 +45,6 @@ body {
 }
 
 /* ================= TITULOS ================= */
-/* Contenedor de emojis */
-.emojis {
-    font-size: 3rem;         /* tamaño grande, pero menor que el título */
-    text-align: center;
-    margin-bottom: 10px;     /* espacio entre emojis y título */
-}
 
 /* Título principal */
 h1 {
@@ -40,13 +52,16 @@ h1 {
     font-size: clamp(3em, 6vw, 5rem);  /* grande y adaptable a pantalla */
     margin: 0 0 20px 0;       /* separa del botón */
     text-align: center;
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-shadow:
+       0 0 8px rgba(255, 0, 0, 0.8),
+       0 0 15px rgba(255, 0, 0, 0.5);
+
 }
 
 /* Ajustes para pantallas muy pequeñas */
 @media (max-width: 400px) {
-    .emojis {
-        font-size: 2.5rem;   /* reduce ligeramente los emojis */
-    }
     h1 {
         font-size: 11vw;      /* mantiene título visible pero adaptable */
     }
@@ -72,16 +87,15 @@ h3 {
 
 /* ================= BOTONES ================= */
 button {
-  width: 100%;
-  max-width: 250px;
-  padding: 15px;
-  font-size: 20px;
+  padding: 16px 28px;
+  font-size: 18px;
   border-radius: 12px;
   border: none;
-  background: linear-gradient(45deg, #00ffcc, #0066ff);
-  color: black;
   cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
+  background: linear-gradient(135deg, #1e88e5, #1565c0);
+  color: white;
+  transition: 0.25s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
 button:hover {
@@ -180,24 +194,28 @@ button.difficulty {
   100% { transform: translateX(0); }
 }
 
-
-#btnMainMenu {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  border-radius: 8px;
+.ranking-btn {
+  padding: 12px 22px;
+  font-size: 15px;
+  border-radius: 12px;
   border: none;
-  background:linear-gradient(45deg, #1c5203,  #37bd0a);
-  color: rgb(0, 0, 0);
   cursor: pointer;
-  font-weight: 600;
-  font-style: italic;
-  z-index: 100;
-  margin: 5vh;
-  margin-bottom: 15vh;
+  background: linear-gradient(135deg, #ff9800, #e65100);
+  color: white;
+  transition: 0.25s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  opacity: 0.9;
 }
 
-#btnMainMenu:hover {
-  background: #1565c0;
+
+.ranking-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+.botones-modo {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;   /* controla la separación */
+  align-items: center;
 }
