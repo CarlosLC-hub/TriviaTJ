@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sin conexión - TriviaTJ</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #ba2929, #000);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  animation: fadeIn 1s ease;
+  max-width: 500px;
+}
+
+.loader {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 8px solid rgba(255,255,255,0);
+  border-top: 8px solid #1e88e5;
+  border-left: 8px solid #1e88e5;  /* ← agregamos esto */
+  border-bottom: 8px solid #1e88e5; /* ← y esto */
+  animation: spin 1s linear infinite;
+  margin: 0 auto 30px auto;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+
+  color: #b6a400;
+  text-shadow: 0 0 10px #000000;
+}
+
+p {
+  font-size: 20px;
+  color: #e0e0e0; /* gris claro */
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+button {
+  margin-top: 30px;
+  padding: 18px 30px;
+  font-size: 20px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: #1e88e5;
+  color: white;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #1565c0;
+  transform: scale(1.05);
+}
+
+/* Animaciones */
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="loader"></div>
+  <h1>Sin conexión</h1>
+  <p>TriviaTJ necesita internet para cargar correctamente.</p>
+    <button onclick="window.location.href='https://carloslc-hub.github.io/TriviaTJ/'">Reintentar</button>
+</div>
+
+
+<script>
+const url = "https://carloslc-hub.github.io/TriviaTJ/";
+
+setInterval(function() {
+    window.location.href = url;
+}, 3000);
+</script>
+</body>
+</html>

@@ -17,11 +17,17 @@
 <!-- ===== MENÚ PRINCIPAL ===== -->
 <div id="mainMenu" class="pantalla activa">
   <div class="pantalla-contenido">
-    <div class="emojis">😌✨</div>
-    <h1>Modo Zen</h1>
+<h1>Modo Zen</h1>
+
+<div class="descripcion">
+  <p>🧘 Juega sin límite de tiempo</p>
+  <p>📖 Aprende a tu propio ritmo</p>
+  <p>🎮 Ideal para practicar y mejorar</p>
+  <p>✨ Sin presión, solo conocimiento</p>
+</div>
+
     <button onclick="goToAmount()">▶️ Jugar</button>
   </div>
-    <div> <button id="btnMainMenu" onclick="goToMainMenu()">🏠 Volver al menú principal</button> </div>
 </div>
 
 <!-- ===== SELECCIÓN DE CANTIDAD ===== -->
@@ -33,8 +39,6 @@
     <button onclick="startGame(40)">40🔴</button>
     <button onclick="startGame(50)">50⚡</button>
    <!-- =====<button onclick="startGame(7)">🧪 Prueba (7)</button> ==== -->
-    <br><br>
-    <button onclick="backToMain()">⬅️ Volver</button>
   </div>
 </div>
 
@@ -71,9 +75,7 @@
     <h1 id="resultEmoji">🎉</h1>
     <h3 id="resultText"></h3>
     <p id="resultStats"></p>
-    <button onclick="goToAmount()">🔁 Volver</button>
   </div>
-   <div> <button id="btnMainMenu" onclick="goToMainMenu()">🏠 Volver al menú principal</button> </div>
 </div>
 <script src="../utils-navigation.js"></script>
 <script src="game-zen.js"></script>

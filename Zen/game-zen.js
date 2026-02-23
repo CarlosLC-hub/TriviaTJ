@@ -56,9 +56,7 @@ function goToAmount() {
   show("amountMenu");
 }
 
-function backToMain() {
-  show("mainMenu");
-}
+
 
 /* ================= INICIO DEL JUEGO ================= */
 function startGame(amount) {

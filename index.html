@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Trivia TJ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="menu.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>TriviaTJ</title>
+<link rel="stylesheet" href="menu.css">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
 <div class="menu-container">
-  <h1><p>¿Listo para probar cuánto sabes?</p></h1>
-          <h2>  Elige un modo de juego  </h2>
+  <h1>¿Listo para probar cuánto sabes?</h1>
+  <h2>Elige un modo de juego</h2>
 
   <div class="menu-buttons">
     <button onclick="goNormal()">Modo Normal</button>
@@ -18,17 +20,15 @@
   </div>
 </div>
 
+<script>
+function goNormal() {
+  window.location.href = "Normal/normal.html";
+}
 
-  <script>
-    function goNormal() {
-      window.location.href = "Normal/normal.html";
-    }
-
-    function goZen() {
-      window.location.href = "Zen/zen.html";
-    }
-  </script>
+function goZen() {
+  window.location.href = "Zen/zen.html";
+}
+</script>
 
 </body>
 </html>
-

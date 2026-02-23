@@ -1,50 +1,79 @@
 * {
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   display: flex;
-  justify-content: center;   /* centra horizontal */
-  align-items: center;       /* centra vertical */
+  justify-content: center;
+  align-items: center;
   background: radial-gradient(circle, #ba2929, #000);
   color: white;
-}
-
-.menu-container {
   text-align: center;
 }
 
-/* CONTENEDOR DE BOTONES */
+/* CONTENEDOR */
+.menu-container {
+  animation: fadeIn 0.8s ease;
+  padding: 20px;
+  max-width: 600px;
+}
+
+/* TITULO */
+h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 8px rgba(255, 0, 0, 0.8),
+    0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+/* SUBTITULO */
+h2 {
+  font-size: 20px;
+  margin-bottom: 35px;
+  color: #4fc3f7;
+  font-weight: 500;
+}
+
+/* BOTONES */
 .menu-buttons {
   display: flex;
-  justify-content: center;   /* CLAVE */
-  align-items: center;
+  justify-content: center;
   gap: 20px;
-  width: 100%;               /* evita quedarse a la izquierda */
-  margin-top: 25px;
+  flex-wrap: wrap;
 }
 
 button {
-  padding: 15px 25px;
+  padding: 16px 28px;
   font-size: 18px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-  background: #1e88e5;
+  background: linear-gradient(135deg, #1e88e5, #1565c0);
   color: white;
+  transition: 0.25s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
 button:hover {
-  background: #1565c0;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
 }
 
+/* Animación entrada */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
+/* RESPONSIVE */
 @media (max-width: 500px) {
-  .menu-buttons {
-    flex-direction: column;
-    text-align: center;
-  }
+  h1 { font-size: 26px; }
+  h2 { font-size: 16px; }
+  button { width: 100%; }
 }

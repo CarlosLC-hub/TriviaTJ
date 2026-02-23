@@ -32,16 +32,39 @@ body {
   padding: 20px;
 }
 
-/* ================= TITULOS ================= */
-.emojis {
-  font-size: 3rem;
-  margin-bottom: 10px;
+.descripcion {
+  margin: 25px 0 35px 0;
+    color: #4fc3f7;
+  font-size: 16px;
+  line-height: 1.8;
+  opacity: 0.95;
+  animation: fadeIn 0.8s ease;
 }
 
+.descripcion p {
+  margin: 8px 0;
+}
+
+/* animación suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= TITULOS ================= */
+
+
 h1 {
-  font-family: 'Lucida Sans', sans-serif;
-  font-size: clamp(3em, 6vw, 5rem);
-  margin-bottom: 20px;
+    font-family: 'Lucida Sans', sans-serif;
+    font-size: clamp(3em, 6vw, 5rem);  /* grande y adaptable a pantalla */
+    margin: 0 0 20px 0;       /* separa del botón */
+    text-align: center;
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-shadow:
+       0 0 8px rgba(255, 0, 0, 0.8),
+       0 0 15px rgba(255, 0, 0, 0.5);
+
 }
 
 h3 {
@@ -61,8 +84,8 @@ button {
   font-size: 20px;
   border-radius: 12px;
   border: none;
-  background: linear-gradient(45deg, #00ffcc, #0066ff);
-  color: black;
+  background: linear-gradient(135deg, #1e88e5, #1565c0);
+  color: white;
   cursor: pointer;
   transition: transform 0.2s;
   margin: 5px;
@@ -70,6 +93,12 @@ button {
 
 button:hover {
   transform: scale(1.05);
+}
+
+
+#swapBtn, #eliminateBtn{
+  background: linear-gradient(45deg, #00ffcc, #0066ff);
+  color: black;
 }
 
 /* ================= RESPUESTAS ================= */
@@ -238,25 +267,4 @@ button:hover {
   font-weight: bold;
   color: yellow;
   text-shadow: 0 0 4px black;
-}
-
-#btnMainMenu{
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
-  background:linear-gradient(45deg, #1c5203,  #37bd0a);
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-  font-weight: 600;
-  font-style: italic;
-  z-index: 100;
-  margin: 5vh;
-  margin-bottom: 15vh;
-}
-
-#btnMainMenu:hover {
-  background: #1f3c00a7;
 }
