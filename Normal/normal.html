@@ -57,7 +57,7 @@
       width: 85%;
       border-radius: 8px;
       border: 1px solid #555;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       background: #2b2b2b;
       color: #fff;
     }
@@ -66,33 +66,23 @@
       color: #aaa;
     }
 
-    #nameModal .modal-buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
     #nameModal button {
-      flex: 1;
-      padding: 12px 0;
+      padding: 12px 20px;
       font-size: 16px;
       cursor: pointer;
       border-radius: 8px;
       border: none;
       font-weight: bold;
+      background: linear-gradient(135deg, #1e88e5, #1565c0);
+      color: white;
       transition: 0.2s;
     }
 
-    #nameModal button.save-btn {
-      background: linear-gradient(135deg, #1e88e5, #1565c0);
-      color: white;
-    }
-
-    #nameModal button.save-btn:hover {
+    #nameModal button:hover {
       background: linear-gradient(135deg, #1565c0, #0d47a1);
     }
 
-    #nameModal button.cancel-btn {
+        #nameModal button.cancel-btn {
       background: #555;
       color: #ddd;
     }
@@ -103,11 +93,10 @@
 
     .error-msg {
       color: #ff5252;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       display: none;
       font-size: 14px;
     }
-    
   </style>
 </head>
 <body>
@@ -143,16 +132,51 @@
   </div>
 </div>
 
+<!-- ===== JUEGO ===== -->
+<div id="game" class="pantalla">
+  <div class="pantalla-contenido">
+
+    <div class="hud">
+      <div id="vidas">❤️❤️❤️</div>
+      <div class="barra-tiempo">
+        <div id="tiempo-barra"></div>
+      </div>
+      <div>⭐ <span id="score">0</span></div>
+    </div>
+
+    <h3 id="question"></h3>
+    <div id="answers"></div>
+
+    <div id="power-ups" class="power-ups-container">
+      <button class="power-btn" id="powerExtraTime" onclick="usePowerUp('extraTime')">⏱️ +5s (2)</button>
+      <button class="power-btn" id="powerSwap" onclick="useSwapQuestionPowerUp()">🔄 Cambiar pregunta (1)</button>
+      <button class="power-btn" id="powerRemove" onclick="usePowerUp('removeOption')">❌ Reducir opciones (1)</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== FINAL ===== -->
+<div id="end" class="pantalla">
+  <div class="pantalla-contenido">
+    <h2 id="endTitle"></h2>
+    <p><span id="finalScore"></span></p>
+    <p id="percentage"></p>
+    <div id="stars"></div>
+    <div class="difficulty-container">
+      <button class="difficulty" onclick="retryGame()">🔁 Reintentar</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== MODAL PARA NOMBRE ===== -->
 <div id="nameModal">
   <div class="modal-content">
     <h3>Ingresa tu nombre</h3>
     <input type="text" id="playerInput" placeholder="Tu nombre">
     <div id="nameError" class="error-msg"></div>
-    <div class="modal-buttons">
-      <button class="save-btn" onclick="savePlayerName()">Guardar</button>
-      <button class="cancel-btn" onclick="cancelPlayerName()">Cancelar</button>
-    </div>
+    <button onclick="savePlayerName()">Guardar</button>
+    <button class="cancel-btn" onclick="cancelPlayerName()">Cancelar</button>
   </div>
 </div>
 
@@ -190,6 +214,8 @@
         currentDifficulty,
         date: readableDate
       });
+
+      console.log("Resultado actualizado correctamente");
     } catch(e){
       console.error("Error Firebase:", e);
     }
@@ -207,15 +233,14 @@
 <script src="game-questions.js"></script>
 <script src="game-result.js"></script>
 
+<!-- ===== JAVASCRIPT DE NOMBRE Y MENÚ ===== -->
 <script>
   let playerName = "";
 
   function showNameModal(){
     if(!playerName){
       document.getElementById("nameModal").style.display = "flex";
-      document.getElementById("playerInput").value = "";
-      document.getElementById("playerInput").focus();
-      document.getElementById("nameError").style.display = "none"; // Asegura que el error esté oculto
+      document.getElementById("nameError").style.display = "none";
     } else {
       showCategoryMenu();
     }
@@ -230,19 +255,15 @@
       document.getElementById("nameModal").style.display = "none";
       showCategoryMenu();
     } else {
-      // Mostrar mensaje de error dentro del modal en lugar de alert
       errorMsg.style.display = "block";
       errorMsg.textContent = "Debes ingresar un nombre para jugar.";
-
-            // 🔥 Desaparece después de 3 segundos
       setTimeout(() => {
         errorMsg.style.display = "none";
       }, 3000);
-    
     }
   }
 
-  function cancelPlayerName(){
+    function cancelPlayerName(){
     document.getElementById("nameModal").style.display = "none";
   }
 
@@ -257,5 +278,4 @@
 </script>
 
 </body>
-
 </html>
